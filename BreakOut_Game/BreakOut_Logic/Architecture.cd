@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BreakOut_logic.Ball">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgAAgACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.Brick">
+    <Position X="14.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAgAAgAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Brick.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BreakOut_logic.Game">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <AssociationLine Name="LevelManager" Type="BreakOut_logic.LevelManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="5.704" />
+        <Point X="5.125" Y="5.704" />
+        <Point X="5.125" Y="6.375" />
+        <Point X="6.5" Y="6.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABQAgAAEACAABAAAAAAIAAAACQAAAAACAAACAgAAAIA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Paddle" />
+      <Property Name="Ball" />
+      <Property Name="Status" />
+      <Property Name="LevelManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BreakOut_logic.Level">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAABABAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.LevelBuilder">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LevelBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.LevelCreator">
+    <Position X="1.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LevelCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.LevelManager">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAICAAAAAAAAAAAAAAAAIAAABBAAAAAAAAAA=</HashCode>
+      <FileName>LevelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.Paddle">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAggAgAIAAIAAAAAAAAQAQAAAAAAAAAAA=</HashCode>
+      <FileName>Paddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreakOut_logic.PaddleFeature" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PaddleFeature.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BreakOut_logic.Status">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAEAAA=</HashCode>
+      <FileName>Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BreakOut_logic.ICheckCollision" Collapsed="true">
+    <Position X="0.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICollisioni.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BreakOut_logic.IPaddleFeature" Collapsed="true">
+    <Position X="2.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPaddleFeature.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BreakOut_logic.IDrawComponents">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDrawComponents.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
