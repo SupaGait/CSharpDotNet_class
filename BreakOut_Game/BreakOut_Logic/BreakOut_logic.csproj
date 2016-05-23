@@ -108,12 +108,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseObject.cs" />
+    <Compile Include="Objects\BaseObject.cs" />
+    <Compile Include="Objects\CollisionObject.cs" />
     <Compile Include="CollisionObjectsManager.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Objects\Brick.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="ICollisioni.cs" />
+    <Compile Include="ICollisionCheck.cs" />
     <Compile Include="IDrawComponents.cs" />
     <Compile Include="IPaddleFeature.cs" />
     <Compile Include="Level.cs" />

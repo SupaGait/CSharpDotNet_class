@@ -49,20 +49,20 @@ namespace BreakOut_view
         #region drawing
         public void drawPaddle(Paddle paddle) {
             // Sizing
-            paddleShape.Width = paddle.Size.Width;
-            paddleShape.Height = paddle.Size.Height;
+            paddleShape.Width = paddle.Size.X;
+            paddleShape.Height = paddle.Size.Y;
 
             // Positioning
             Canvas.SetLeft(paddleShape, paddle.Position.X);
-            Canvas.SetTop(paddleShape, GameScreen.ActualHeight - paddle.Size.Height);
+            Canvas.SetTop(paddleShape, paddle.Position.Y);
         }
         public void drawBricks(List<Brick> bricks) {
             throw new NotImplementedException();
         }
         public void drawBall(Ball ball) {
             // Sizing
-            ballShape.Width = ball.Size.Width;
-            ballShape.Height = ball.Size.Height;
+            ballShape.Width = ball.Size.X;
+            ballShape.Height = ball.Size.Y;
 
             // Positioning
             Canvas.SetLeft(ballShape, ball.Position.X);
@@ -76,7 +76,7 @@ namespace BreakOut_view
 
         private void GameScreen_PointerMoved(object sender, PointerRoutedEventArgs e) {
             Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(GameScreen);
-            theGame.Paddle.setUserPosition((float)point.Position.X, 0);
+            theGame.Paddle.setUserPosition((float)point.Position.X, (float)point.Position.Y);
         }
 
         //Todo: for rescaling feature..

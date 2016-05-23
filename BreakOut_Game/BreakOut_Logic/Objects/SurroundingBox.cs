@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
+using System.Numerics;
 
 namespace BreakOut_logic.Objects {
-    class SurroundingBox : BaseObject, ICheckCollision {
+    class SurroundingBox : CollisionObject {
 
-        public SurroundingBox(Size size) : base(0, 0, size, true) {   
+        public SurroundingBox(Vector2 size) : base(Vector2.Zero, size, true) {
         }
 
-        public bool checkCollision(Size size, Point position) {
+        public override bool checkCollision(BaseObject collisionObject) {
             throw new NotImplementedException();
         }
     }

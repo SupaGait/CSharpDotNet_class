@@ -1,19 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using BreakOut_logic.Objects;
+using System.Collections.Generic;
 
 namespace BreakOut_logic {
-    public class CollisionObjectsManager {
+    public class CollisionManager {
 
-        private List<ICheckCollision> collisionObjects = new List<ICheckCollision>();
+        private List<CollisionObject> collisionObjects = new List<CollisionObject>();
 
         // Add an object which implements the CheckCollision interface
-        public void addObject(ICheckCollision collisionObject) {
+        public void addObject(CollisionObject collisionObject) {
             collisionObjects.Add(collisionObject);
         }
 
-        public List<BaseObject> checkCollision() {
-            List<BaseObject> collisionObjects = new List<BaseObject>();
+        // Run through all known collision objects and check for a collision with the given object
+        public List<CollisionObject> checkCollision(BaseObject objectToCheck) {
+            List<CollisionObject> objectsInCollision = new List<CollisionObject>();
 
-            return collisionObjects;
+            foreach(CollisionObject collisionObject in collisionObjects) {
+                if (collisionObject.checkCollision(objectToCheck)) {
+                    objectsInCollision.Add(collisionObject);
+                }
+            }
+            return objectsInCollision;
         }
     }
 }

@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Numerics;
 using Windows.Foundation;
 
 namespace BreakOut_logic.Objects {
-    public class Brick : ICheckCollision {
-        private Point Position;
+    public class Brick : CollisionObject {
         private int Health;
-        private Point Size;
 
-        public bool checkCollision(Size size, Point position) {
+        public Brick(Vector2 position, Vector2 size, bool destroyable) : 
+            base(position, size, destroyable) {
+        }
+        public override bool checkCollision(BaseObject collisionObject) {
             throw new NotImplementedException();
         }
     }

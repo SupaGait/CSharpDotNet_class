@@ -11,14 +11,14 @@ using Windows.UI.Xaml;
 namespace BreakOut_logic {
     public class Game {
         // Game Objects
-        private Paddle paddle = new Paddle();
-        private Ball ball = new Ball();
+        private Paddle paddle;
+        private Ball ball;
         private SurroundingBox surroundingBox;
 
         // Game logic
         private Status status = new Status();
         private LevelManager levelManager = new LevelManager();
-        private CollisionObjectsManager collisionObjectsManager = new CollisionObjectsManager();
+        private CollisionManager collisionObjectsManager = new CollisionManager();
         private DispatcherTimer timer = new DispatcherTimer();
         private IDrawComponents drawer;
 
@@ -32,11 +32,15 @@ namespace BreakOut_logic {
             this.drawer = drawer;
 
             // Configurate the game
-            surroundingBox = new SurroundingBox(gameScreenSize);
+            surroundingBox = new SurroundingBox(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
+
+            // Create objects
+            ball = new Ball(collisionObjectsManager);
+            paddle = new Paddle(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
             ball.Position = new Vector2((float)gameScreenSize.Width / 2, (float)gameScreenSize.Height / 2);
 
             // Add default objects to collision manager
-            collisionObjectsManager.addObject(surroundingBox);
+            //collisionObjectsManager.addObject(surroundingBox);
             collisionObjectsManager.addObject(paddle);
         }
 
@@ -96,7 +100,7 @@ namespace BreakOut_logic {
             throw new NotImplementedException();
         }
 
-        public CollisionObjectsManager CollisionObjectsManager {
+        public CollisionManager CollisionObjectsManager {
             get {
                 return collisionObjectsManager;
             }
