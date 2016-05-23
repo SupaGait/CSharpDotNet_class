@@ -6,30 +6,20 @@ using System.Numerics;
 using Windows.Foundation;
 
 namespace BreakOut_logic.Objects {
-    public class Ball {
-        private Size size = new Size(30, 30);
+    public class Ball : BaseObject {
+        private Vector2 direction;
+        private int velocity_PixelSec = 100;
 
-        private int velocity = 1;
-        private Vector2 position = new Vector2(0, 0);
-        private Vector2 direction = new Vector2(0, 0);
+        public Ball() : base(0,0, new Size(30, 30), false) {
+            // Todo input position and direction based on paddle?
+            direction = Vector2.Normalize(new Vector2(0, 1));
+        }
 
-        internal void update(double elapsedTimeMs) {
+        internal void update(float elapsedTimeMs) {
             // Update the position based on the direction
-            direction *= 2;
-        }
+            Position += ((elapsedTimeMs / 1000) * velocity_PixelSec) * direction;
 
-        public Point Position {
-            get {
-                return new Point(position.X, position.Y);
-            }
-            set {
-                position = new Vector2((float)value.X, (float)value.Y);
-            }
+            // Check for collision against any object
         }
-        public Size Size {
-            get { return size; }
-        }
-
-
     }
 }

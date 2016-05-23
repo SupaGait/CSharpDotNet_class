@@ -108,6 +108,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="CollisionObjectsManager.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Objects\Brick.cs" />
     <Compile Include="Game.cs" />

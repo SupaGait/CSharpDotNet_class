@@ -76,7 +76,7 @@ namespace BreakOut_view
 
         private void GameScreen_PointerMoved(object sender, PointerRoutedEventArgs e) {
             Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(GameScreen);
-            theGame.Paddle.Position = new Point(point.Position.X, 0);
+            theGame.Paddle.setUserPosition((float)point.Position.X, 0);
         }
 
         //Todo: for rescaling feature..

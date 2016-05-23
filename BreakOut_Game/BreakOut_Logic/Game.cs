@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using Windows.Foundation;
 using Windows.System.Threading;
@@ -17,6 +18,7 @@ namespace BreakOut_logic {
         // Game logic
         private Status status = new Status();
         private LevelManager levelManager = new LevelManager();
+        private CollisionObjectsManager collisionObjectsManager = new CollisionObjectsManager();
         private DispatcherTimer timer = new DispatcherTimer();
         private IDrawComponents drawer;
 
@@ -31,13 +33,18 @@ namespace BreakOut_logic {
 
             // Configurate the game
             surroundingBox = new SurroundingBox(gameScreenSize);
-            ball.Position = new Point(gameScreenSize.Width / 2, gameScreenSize.Height / 2);
+            ball.Position = new Vector2((float)gameScreenSize.Width / 2, (float)gameScreenSize.Height / 2);
+
+            // Add default objects to collision manager
+            collisionObjectsManager.addObject(surroundingBox);
+            collisionObjectsManager.addObject(paddle);
         }
 
         private void updateGameTimout(object sender, object e) {
             // Update
-            double elapsedTimeMs = (sender as DispatcherTimer).Interval.TotalMilliseconds;
-            //ball.update(elapsedTimeMs);
+            float elapsedTimeMs = (float)(sender as DispatcherTimer).Interval.TotalMilliseconds;
+            ball.update(elapsedTimeMs);
+            paddle.update(elapsedTimeMs);
 
             // Draw
             drawer.drawPaddle(paddle);
@@ -87,6 +94,12 @@ namespace BreakOut_logic {
         }
         public void SetScreenSize(Size size) {
             throw new NotImplementedException();
+        }
+
+        public CollisionObjectsManager CollisionObjectsManager {
+            get {
+                return collisionObjectsManager;
+            }
         }
     }
 }

@@ -6,10 +6,12 @@ using System.Text;
 using Windows.Foundation;
 
 namespace BreakOut_logic.Objects {
-    public class Paddle : ICheckCollision {
-        private Point position = new Point(0, 0);
-        private Size size = new Size(150, 30);
+    public class Paddle : BaseObject, ICheckCollision {
         private double speed = 0.0;
+        private Vector2 userPosition = new Vector2(0, 0);
+        public Paddle() : base(0, 0, new Size(150, 30), false) {
+            
+        }
 
         public BreakOut_logic.IPaddleFeature[] IPaddleFeature {
             get {
@@ -19,11 +21,15 @@ namespace BreakOut_logic.Objects {
             }
         }
 
-        public void Update(double elapsedTime) {
+        public void update(float elapsedTimeMs) {
             // Move the paddle to the location requested by the user
             // Todo
-            position = requestedPosition;
+            Position = userPosition;
+        }
 
+        public void setUserPosition(float xPostion, float yPosition) {
+            userPosition.X = xPostion;
+            userPosition.Y = yPosition;
         }
 
         public bool checkCollision(Size size, Point position) {
@@ -36,18 +42,5 @@ namespace BreakOut_logic.Objects {
             get { return requestedPosition; }
             set { requestedPosition = value; }
         }
-
-        public Point Position {
-            get {
-                return position;
-            }
-            set {
-                position = value;
-            }
-        }
-        public Size Size {
-            get { return size; }
-        }
-
     }
 }
