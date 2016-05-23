@@ -6,6 +6,7 @@ namespace BreakOut_logic.Objects {
         private Vector2 position;
         private Vector2 size;
         private Vector2 direction;
+        private ObjectType objectType;
 
         private bool destroyable;
         private bool visable = true;
@@ -14,7 +15,8 @@ namespace BreakOut_logic.Objects {
         private float yPosition;
         private Size size1;
 
-        public BaseObject(Vector2 position, Vector2 size, bool destroyable) {
+        public BaseObject(ObjectType objectType, Vector2 position, Vector2 size, bool destroyable) {
+            this.objectType = objectType;
             this.position = position;
             this.size = size;
             this.destroyable = destroyable;
@@ -38,6 +40,9 @@ namespace BreakOut_logic.Objects {
         }
         public bool Destroy {
             set { markedForDestroy = value; }
+        }
+        public ObjectType ObjectType {
+            get { return objectType; }
         }
     }
 }

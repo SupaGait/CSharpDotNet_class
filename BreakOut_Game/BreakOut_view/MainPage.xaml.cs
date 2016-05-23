@@ -37,7 +37,7 @@ namespace BreakOut_view
             this.InitializeComponent();
 
             // Set the game callbacks for drawing to this, currently hardcoded screen size
-            theGame = new Game(this, 20, new Size(1200, 900));
+            theGame = new Game(this, 1, new Size(1200, 900));
 
             // Create default objects
             paddleShape = createShape(objectShape.PaddleShape);

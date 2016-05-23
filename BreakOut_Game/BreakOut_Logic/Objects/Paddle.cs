@@ -9,7 +9,7 @@ namespace BreakOut_logic.Objects {
         private Vector2 userPosition = new Vector2(0, 0);
 
         public Paddle(Vector2 gameScreenSize) : 
-            base(new Vector2((gameScreenSize.X - defaultSize.X)/2, gameScreenSize.Y - defaultSize.Y), 
+            base(ObjectType.PaddleType, new Vector2((gameScreenSize.X - defaultSize.X)/2, gameScreenSize.Y - defaultSize.Y), 
                 defaultSize, 
                 false) {
             // Consturctor
@@ -38,10 +38,18 @@ namespace BreakOut_logic.Objects {
         public override bool checkCollision(BaseObject collisionObject) {
             // check if the resulting vector from substraction positions falls in the size of the object, which means its a collision
             Vector2 resultV = collisionObject.Position - this.Position;
-            return (resultV.X > 0 && 
-                    resultV.X < this.Size.X &&
-                    resultV.Y > 0 &&
-                    resultV.Y < this.Size.Y);
+            return (resultV.X > 0 && resultV.X < this.Size.X &&
+                    resultV.Y > 0 && resultV.Y < this.Size.Y);
+        }
+
+        // Return a new angle based on position of impact relative to paddle
+        public void getNewBallAngle(Ball ball) {
+            float paddleXCenter = Position.X + Size.X/2;
+            float impactXDiff = ball.Position.X - paddleXCenter;
+            float outputX = (impactXDiff == 0 ? 0 : impactXDiff / Size.X) *-2;
+
+            // Manually give a new direction
+            ball.Direction = new Vector2(outputX, -1); // Always Up
         }
 
         // Location where the paddle needs to go by user

@@ -7,7 +7,7 @@ namespace BreakOut_logic.Objects {
         private int Health;
 
         public Brick(Vector2 position, Vector2 size, bool destroyable) : 
-            base(position, size, destroyable) {
+            base(ObjectType.BrickType, position, size, destroyable) {
         }
         public override bool checkCollision(BaseObject collisionObject) {
             throw new NotImplementedException();

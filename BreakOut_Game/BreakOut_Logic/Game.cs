@@ -40,7 +40,7 @@ namespace BreakOut_logic {
             ball.Position = new Vector2((float)gameScreenSize.Width / 2, (float)gameScreenSize.Height / 2);
 
             // Add default objects to collision manager
-            //collisionObjectsManager.addObject(surroundingBox);
+            collisionObjectsManager.addObject(surroundingBox);
             collisionObjectsManager.addObject(paddle);
         }
 

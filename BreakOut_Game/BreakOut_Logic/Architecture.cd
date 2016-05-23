@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BreakOut_logic.Objects.Ball">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="1" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAoAAQAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Objects\Ball.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Objects.Brick">
-    <Position X="12.25" Y="6" Width="1.5" />
+    <Position X="12.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Objects\Brick.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Game">
-    <Position X="4.5" Y="4.75" Width="1.5" />
+    <Position X="5" Y="5.5" Width="1.5" />
     <AssociationLine Name="LevelManager" Type="BreakOut_logic.LevelManager" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6" Y="8.616" />
-        <Point X="6.375" Y="8.616" />
-        <Point X="6.375" Y="8.125" />
-        <Point X="7.75" Y="8.125" />
+        <Point X="6.5" Y="9.366" />
+        <Point X="6.875" Y="9.366" />
+        <Point X="6.875" Y="8.875" />
+        <Point X="8.25" Y="8.875" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="CollisionObjectsManager" Type="BreakOut_logic.CollisionManager">
@@ -40,42 +40,42 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="BreakOut_logic.Level">
-    <Position X="10.25" Y="6.5" Width="1.5" />
+    <Position X="10.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAABABAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Level.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelBuilder">
-    <Position X="14.5" Y="8.25" Width="1.5" />
+    <Position X="15" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>LevelBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelCreator">
-    <Position X="2.5" Y="12.25" Width="1.5" />
+    <Position X="3" Y="13" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>LevelCreator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelManager">
-    <Position X="7.75" Y="7.5" Width="1.5" />
+    <Position X="8.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAICAAAAAAAAAAAAAAAAIAAABBAAAAAAAAAA=</HashCode>
       <FileName>LevelManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Objects.Paddle" Collapsed="true">
-    <Position X="3.5" Y="2" Width="1.5" />
+    <Position X="4" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAGAAAAAAAAAAgAAAAAAAAAAAIAAAQAQAAAAAAAEAAA=</HashCode>
+      <HashCode>EAGAAAAAAAAAAgAAAAAAAAAAAIAIAQAQAAAAAAAEAAA=</HashCode>
       <FileName>Objects\Paddle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.PaddleFeature" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="15.5" Y="5" Width="1.5" />
+    <Position X="16" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PaddleFeature.cs</FileName>
@@ -83,35 +83,35 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BreakOut_logic.Status">
-    <Position X="2" Y="6.75" Width="1.5" />
+    <Position X="2.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAEAAA=</HashCode>
       <FileName>Status.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Objects.SurroundingBox" Collapsed="true">
-    <Position X="5.25" Y="2" Width="1.5" />
+    <Position X="5.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Objects\SurroundingBox.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.CollisionManager">
-    <Position X="1.5" Y="4.5" Width="1.5" />
+    <Position X="2" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAIAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CollisionObjectsManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Objects.BaseObject" Collapsed="true">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAoAAgAIAAIAACAABAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAACABAAQoAAgAIAAIAACEABAAAAAAIAAACgAAAA=</HashCode>
       <FileName>Objects\BaseObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.Objects.CollisionObject" Collapsed="true">
-    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Objects\CollisionObject.cs</FileName>
@@ -119,25 +119,32 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="BreakOut_logic.ICheckCollision">
-    <Position X="8.75" Y="0.75" Width="2.5" />
+    <Position X="9.25" Y="1.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ICollisionCheck.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BreakOut_logic.IPaddleFeature" Collapsed="true">
-    <Position X="15.5" Y="5.75" Width="1.5" />
+    <Position X="16" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IPaddleFeature.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BreakOut_logic.IDrawComponents">
-    <Position X="11.5" Y="0.75" Width="1.5" />
+    <Position X="12" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDrawComponents.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="BreakOut_logic.Objects.ObjectType" Collapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAIAAAQAAACAAAAAAACAAA=</HashCode>
+      <FileName>Objects\ObjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
