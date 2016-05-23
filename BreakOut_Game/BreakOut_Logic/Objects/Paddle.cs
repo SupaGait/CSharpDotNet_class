@@ -36,17 +36,14 @@ namespace BreakOut_logic.Objects {
 
         // Check for collision
         public override bool checkCollision(BaseObject collisionObject) {
-            // check if the resulting vector from substraction positions falls in the size of the object, which means its a collision
-            Vector2 resultV = collisionObject.Position - this.Position;
-            return (resultV.X > 0 && resultV.X < this.Size.X &&
-                    resultV.Y > 0 && resultV.Y < this.Size.Y);
+            return checkSquareCollision(collisionObject, this);
         }
 
         // Return a new angle based on position of impact relative to paddle
         public void getNewBallAngle(Ball ball) {
             float paddleXCenter = Position.X + Size.X/2;
             float impactXDiff = ball.Position.X - paddleXCenter;
-            float outputX = (impactXDiff == 0 ? 0 : impactXDiff / Size.X) *-2;
+            float outputX = (impactXDiff == 0 ? 0 : impactXDiff / Size.X * (float)Math.PI);
 
             // Manually give a new direction
             ball.Direction = new Vector2(outputX, -1); // Always Up
