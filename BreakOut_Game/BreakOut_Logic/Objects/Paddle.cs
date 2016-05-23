@@ -5,8 +5,8 @@ using System.Numerics;
 using System.Text;
 using Windows.Foundation;
 
-namespace BreakOut_logic {
-    public class Paddle {
+namespace BreakOut_logic.Objects {
+    public class Paddle : ICheckCollision {
         private Point position = new Point(0, 0);
         private Size size = new Size(150, 30);
         private double speed = 0.0;
@@ -24,6 +24,10 @@ namespace BreakOut_logic {
             // Todo
             position = requestedPosition;
 
+        }
+
+        public bool checkCollision(Size size, Point position) {
+            throw new NotImplementedException();
         }
 
         // Location where the paddle needs to go by user

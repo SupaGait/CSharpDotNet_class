@@ -24,12 +24,12 @@
             FontSize="48" Visibility="Collapsed" 
             />
         <!--Click="OnStart"-->
-        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved">
+        <Canvas Background="White" x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged">
             <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
-       Fill="Red" Width="200" Height="200" />-->
+       Fill="Red" Width="200" Height="200" />
             <Canvas.Resources>
                 <Storyboard x:Name="Move"/>
-            </Canvas.Resources>
+            </Canvas.Resources>-->
         </Canvas>
     </Grid>
 </Page>

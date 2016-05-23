@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Windows.Foundation;
 
-namespace BreakOut_logic {
+namespace BreakOut_logic.Objects {
     public class Brick : ICheckCollision {
         private Point Position;
         private int Health;

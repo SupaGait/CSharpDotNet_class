@@ -7,8 +7,8 @@
     <ProjectGuid>{86B964AD-7270-4119-8745-15074337397C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BreakOut_Logics</RootNamespace>
-    <AssemblyName>BreakOut_Logics</AssemblyName>
+    <RootNamespace>BreakOut_logic</RootNamespace>
+    <AssemblyName>BreakOut_logic</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -108,8 +108,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ball.cs" />
-    <Compile Include="Brick.cs" />
+    <Compile Include="Objects\Ball.cs" />
+    <Compile Include="Objects\Brick.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="ICollisioni.cs" />
     <Compile Include="IDrawComponents.cs" />
@@ -118,7 +118,8 @@
     <Compile Include="LevelBuilder.cs" />
     <Compile Include="LevelCreator.cs" />
     <Compile Include="LevelManager.cs" />
-    <Compile Include="Paddle.cs" />
+    <Compile Include="Objects\Paddle.cs" />
+    <Compile Include="Objects\SurroundingBox.cs" />
     <Compile Include="PaddleFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
