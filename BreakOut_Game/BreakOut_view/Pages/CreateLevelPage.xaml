@@ -13,8 +13,8 @@
             <Button x:Name="button_select" Content="Select mode" Height="62" Canvas.Left="10" Canvas.Top="648" Width="139"/>
             <Button x:Name="button_loadLevel" Content="Load Level" Height="33" Canvas.Left="1049" Canvas.Top="564" Width="139"/>
             <Button x:Name="button_saveLevel" Content="Save level" Height="35" Canvas.Left="1049" Canvas.Top="608" Width="139"/>
-            <Button x:Name="button_home" Content="Return to main menu" Height="42" Canvas.Left="1034" Canvas.Top="654" Width="171"/>
-            <TextBox x:Name="textBox_debug" Canvas.Left="10" TextWrapping="Wrap" Text="debug info" Canvas.Top="10" Height="100" Width="156"/>
+            <Button x:Name="button_home" Content="Return to main menu" Height="42" Canvas.Left="1034" Canvas.Top="654" Width="171" Click="button_home_Click"/>
+            <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Height="132" Width="204"/>
             <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
        Fill="Red" Width="200" Height="200" />
             <Canvas.Resources>

@@ -7,7 +7,7 @@
       <FileName>Objects\Ball.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BreakOut_logic.Objects.Brick" Collapsed="true">
+  <Class Name="BreakOut_logic.Objects.Brick">
     <Position X="7.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
@@ -47,7 +47,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelBuilder">
-    <Position X="10.75" Y="8.5" Width="1.5" />
+    <Position X="8.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>LevelBuilder.cs</FileName>

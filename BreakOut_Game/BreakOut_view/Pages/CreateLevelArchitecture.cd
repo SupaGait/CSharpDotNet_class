@@ -3,7 +3,7 @@
   <Class Name="BreakOut_view.DrawObjects">
     <Position X="2.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAACACQIAAAAAAAQAAAAAAAQAQAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAACACQICAAAAAAQAAAAAAAQAQAAAAAAA=</HashCode>
       <FileName>PointerActions\DrawObjects.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -20,7 +20,7 @@
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAJIAAABAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAJIAAABAAAEAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Pages\CreateLevelPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -33,22 +33,22 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="BreakOut_view.IRegisterEvents">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Interface Name="BreakOut_view.IRegisterEvents" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAAAA=</HashCode>
       <FileName>PointerActions\IRegisterEvents.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="BreakOut_view.PointerMode" Collapsed="true">
-    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Position X="7" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAgAA=</HashCode>
       <FileName>PointerActions\PointerMode.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Delegate Name="BreakOut_view.PrintDebugMessage" Collapsed="true">
-    <Position X="6" Y="2.25" Width="1.5" />
+    <Position X="7" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PointerActions\PrintDebugMessage.cs</FileName>

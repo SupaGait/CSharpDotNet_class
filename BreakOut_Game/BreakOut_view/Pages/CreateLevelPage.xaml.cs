@@ -63,5 +63,9 @@ namespace BreakOut_view {
         public void debugMessage(String message) {
             textBox_debug.Text = message;
         }
+
+        private void button_home_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(StartPage), this);
+        }
     }
 }
