@@ -8,6 +8,18 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Canvas Background="White" x:Name="GameScreen" Width="1280" Height="720">
+            <Button x:Name="button_draw" Content="Draw mode" Height="62" Canvas.Left="10" Canvas.Top="564" Width="139"/>
+            <Button x:Name="button_select" Content="Select mode" Height="62" Canvas.Left="10" Canvas.Top="648" Width="139"/>
+            <Button x:Name="button_loadLevel" Content="Load Level" Height="33" Canvas.Left="1049" Canvas.Top="564" Width="139"/>
+            <Button x:Name="button_saveLevel" Content="Save level" Height="35" Canvas.Left="1049" Canvas.Top="608" Width="139"/>
+            <Button x:Name="button_home" Content="Return to main menu" Height="42" Canvas.Left="1034" Canvas.Top="654" Width="171"/>
+            <TextBox x:Name="textBox_debug" Canvas.Left="10" TextWrapping="Wrap" Text="debug info" Canvas.Top="10" Height="100" Width="156"/>
+            <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
+       Fill="Red" Width="200" Height="200" />
+            <Canvas.Resources>
+                <Storyboard x:Name="Move"/>
+            </Canvas.Resources>-->
+        </Canvas>
     </Grid>
 </Page>

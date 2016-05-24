@@ -20,8 +20,48 @@ namespace BreakOut_view {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class CreateLevelPage : Page {
+        private DrawObjects drawObjects;
+        private SelectObjects selectObjects;
+        private PointerModeAction selectedMode;
+
         public CreateLevelPage() {
             this.InitializeComponent();
+
+            // Create the objects
+            drawObjects = new DrawObjects(GameScreen, debugMessage);
+            selectObjects = new SelectObjects(GameScreen, debugMessage);
+
+            // Start in drawMode
+            selectedMode = drawObjects;
+            selectedMode.register();
+        }
+
+        // Set the response of the interface based on the new mode
+        private void setMode(PointerMode newMode) {
+
+            // Unrigister the current(old) mode
+            selectedMode.unRegister();
+
+            // Select the new mode
+            switch (newMode) {
+                case PointerMode.DrawMode: {
+                        selectedMode = drawObjects;
+                        break;
+                    }
+                case PointerMode.SelectMode: {
+                        selectedMode = selectObjects;
+                        break;
+                    }
+                default:  {
+                        throw new InvalidOperationException("Selected unavailable operation.");
+                    }
+            }
+            // Rigister the new mode
+            selectedMode.register();
+        }
+
+        public void debugMessage(String message) {
+            textBox_debug.Text = message;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BreakOut_view {
         }
 
         private void CreateLevel_Click(object sender, RoutedEventArgs e) {
-
+            this.Frame.Navigate(typeof(CreateLevelPage), this);
         }
     }
 }

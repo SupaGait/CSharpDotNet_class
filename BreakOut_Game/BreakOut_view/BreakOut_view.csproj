@@ -92,19 +92,26 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Pages\CreateLevelArchitecture.cd" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PointerActions\DrawObjects.cs" />
+    <Compile Include="PointerActions\IRegisterEvents.cs" />
     <Compile Include="Pages\CreateLevelPage.xaml.cs">
       <DependentUpon>CreateLevelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PointerActions\PointerMode.cs" />
+    <Compile Include="PointerActions\pointerModeAction.cs" />
+    <Compile Include="PointerActions\PrintDebugMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PointerActions\SelectObjects.cs" />
     <Compile Include="Shapes\PaddleShape.cs" />
     <Compile Include="Pages\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
