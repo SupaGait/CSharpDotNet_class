@@ -19,15 +19,14 @@ namespace BreakOut_logic.Objects {
 
             // Check for collision against any object
             var collisionObjects = collisionManager.checkCollision(this);
+            
             // Take the first object
             if (collisionObjects.Count > 0) {
                 foreach (CollisionObject collisioObject in collisionObjects) {
-
                     // Check for an paddle
                     if (collisioObject.ObjectType == ObjectType.PaddleType) {
                         (collisioObject as Paddle).getNewBallAngle(this);
                     }
-
                     // Check for wall
                     if (collisioObject.ObjectType == ObjectType.SurroundingType) {
                         (collisioObject as SurroundingBox).getNewBallAngle(this);

@@ -26,7 +26,7 @@ namespace BreakOut_logic.Objects {
         public void update(float elapsedTimeMs) {
             // Move the paddle to the location requested by the user
             // Todo
-            Position = userPosition;
+            Position = new Vector2(userPosition.X, Position.Y);
         }
 
         public void setUserPosition(float xPostion, float yPosition) {

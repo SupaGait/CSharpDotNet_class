@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Shapes;
 using BreakOut_view.Shapes;
 using static BreakOut_view.Shapes.ShapeFactory;
 using BreakOut_logic.Objects;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,24 +27,41 @@ namespace BreakOut_view
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, IDrawComponents
+    public sealed partial class GamePage : Page, IDrawComponents
     {
         Game theGame;
         Shape paddleShape;
         Shape ballShape;
 
-        public MainPage()
+        public GamePage()
         {
             this.InitializeComponent();
 
+            Size windowSize = new Size(1280, 720);
+
+            // Reset window drawing size
+            ApplicationView.PreferredLaunchViewSize = windowSize;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
             // Set the game callbacks for drawing to this, currently hardcoded screen size
-            theGame = new Game(this, 1, new Size(1200, 900));
+            theGame = new Game(this, 1, windowSize);
 
             // Create default objects
             paddleShape = createShape(objectShape.PaddleShape);
             GameScreen.Children.Add(paddleShape);
             ballShape = createShape(objectShape.BallShape);
             GameScreen.Children.Add(ballShape);
+        }
+
+        // If navigated to here, check the reason
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            theGame.Start();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e) {
+            // When leaving, pauze the game
+            theGame.Pauze();
+            base.OnNavigatedFrom(e);
         }
 
         #region drawing
@@ -84,6 +102,12 @@ namespace BreakOut_view
             double width = (sender as Canvas).ActualWidth;
             double height = (sender as Canvas).ActualHeight;
             //theGame.SetScreenSize(new Size(width, height));
+        }
+
+        private void GameScreen_KeyDown(object sender, KeyRoutedEventArgs e) {
+            if (e.Key == Windows.System.VirtualKey.Escape) {
+                this.Frame.Navigate(typeof(StartPage), this);
+            }
         }
     }
 }

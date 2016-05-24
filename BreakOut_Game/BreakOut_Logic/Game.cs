@@ -45,46 +45,41 @@ namespace BreakOut_logic {
         }
 
         private void updateGameTimout(object sender, object e) {
-            // Update
             float elapsedTimeMs = (float)(sender as DispatcherTimer).Interval.TotalMilliseconds;
-            ball.update(elapsedTimeMs);
-            paddle.update(elapsedTimeMs);
 
-            // Draw
-            drawer.drawPaddle(paddle);
-            drawer.drawBall(ball);
-            //drawer.drawBricks(levelManager.Level.Bricks);
+            if (status.GameStatus == GameStatus.GameRunningStatus) { 
+                // Update    
+                ball.update(elapsedTimeMs);
+                paddle.update(elapsedTimeMs);
+
+                // Draw
+                drawer.drawPaddle(paddle);
+                drawer.drawBall(ball);
+                //drawer.drawBricks(levelManager.Level.Bricks);
+            }
         }
 
         public Paddle Paddle {
-            get {
-                return paddle;
-            }
+            get { return paddle; }
         }
         public Ball Ball {
-            get {
-                return ball;
-            }
+            get { return ball; }
         }
 
         public Status Status {
-            get {
-                return status;
-            }
+            get { return status; }
         }
 
         public LevelManager LevelManager {
-            get {
-                return levelManager;
-            }
+            get { return levelManager; }
         }
 
         public void Start() {
-            throw new System.NotImplementedException();
+            status.newGame();
         }
 
         public void Pauze() {
-            throw new System.NotImplementedException();
+            status.pauzeGame();
         }
 
         public void Reset() {

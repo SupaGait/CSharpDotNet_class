@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="BreakOut_view.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BreakOut_view"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <Canvas Background="White" x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1280" Height="720" KeyDown="GameScreen_KeyDown">
+            <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
+       Fill="Red" Width="200" Height="200" />
+            <Canvas.Resources>
+                <Storyboard x:Name="Move"/>
+            </Canvas.Resources>-->
+        </Canvas>
+    </Grid>
+</Page>
