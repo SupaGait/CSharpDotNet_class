@@ -6,13 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid>
-        <Canvas Background="White" x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1280" Height="720" KeyDown="GameScreen_KeyDown">
+    <Grid Background="#FFE6E6E6">
+        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1080" Height="720" KeyDown="GameScreen_KeyDown" Margin="0,0,200,0" Background="White">
             <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
        Fill="Red" Width="200" Height="200" />
             <Canvas.Resources>
                 <Storyboard x:Name="Move"/>
             </Canvas.Resources>-->
         </Canvas>
+        <Button x:Name="button_home" Content="Home" HorizontalAlignment="Left" Margin="1134,675,0,0" VerticalAlignment="Top" Height="35" Width="103" Click="button_home_Click"/>
+        <Button x:Name="button_pauze" Content="Pauze" HorizontalAlignment="Left" Margin="1134,591,0,0" VerticalAlignment="Top" Height="35" Width="103"/>
     </Grid>
 </Page>

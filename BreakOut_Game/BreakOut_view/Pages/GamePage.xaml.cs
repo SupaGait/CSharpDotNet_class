@@ -33,18 +33,19 @@ namespace BreakOut_view
         Shape paddleShape;
         Shape ballShape;
 
+        public static float menuSize = 200;
+        public static Size windowSize = new Size(1280, 720);
+
         public GamePage()
         {
             this.InitializeComponent();
 
-            Size windowSize = new Size(1280, 720);
-
             // Reset window drawing size
-            ApplicationView.PreferredLaunchViewSize = windowSize;
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            //ApplicationView.PreferredLaunchViewSize = windowSize;
+            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
             // Set the game callbacks for drawing to this, currently hardcoded screen size
-            theGame = new Game(this, 1, windowSize);
+            theGame = new Game(this, 1, new Size(windowSize.Width - menuSize, windowSize.Height));
 
             // Create default objects
             paddleShape = createShape(objectShape.PaddleShape);
@@ -108,6 +109,10 @@ namespace BreakOut_view
             if (e.Key == Windows.System.VirtualKey.Escape) {
                 this.Frame.Navigate(typeof(StartPage), this);
             }
+        }
+
+        private void button_home_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(StartPage), this);
         }
     }
 }

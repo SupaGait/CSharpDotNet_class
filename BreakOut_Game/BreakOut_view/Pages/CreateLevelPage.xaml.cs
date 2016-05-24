@@ -61,11 +61,21 @@ namespace BreakOut_view {
         }
 
         public void debugMessage(String message) {
-            textBox_debug.Text = message;
+            textBox_debug.Text = message + "\n";
         }
 
         private void button_home_Click(object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(StartPage), this);
+        }
+
+        private void button_draw_Click(object sender, RoutedEventArgs e) {
+            setMode(PointerMode.DrawMode);
+            debugMessage("Switched to drawMode");
+        }
+
+        private void button_select_Click(object sender, RoutedEventArgs e) {
+            setMode(PointerMode.SelectMode);
+            debugMessage("Switched to selectMode");
         }
     }
 }

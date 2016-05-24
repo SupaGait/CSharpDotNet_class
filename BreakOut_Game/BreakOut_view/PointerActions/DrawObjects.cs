@@ -10,11 +10,9 @@ using Windows.UI.Xaml.Shapes;
 
 namespace BreakOut_view {
     public class DrawObjects : PointerModeAction {
-        private bool pressed = false;
         private Canvas gameScreen;
         private PrintDebugMessage debugMessage;
 
-        // 
         private Shape currentShape;
         private Point currentShapeStart;
 
@@ -85,9 +83,8 @@ namespace BreakOut_view {
                 double objectWidth = point.Position.X - currentShapeStart.X;
                 double objectHeight = point.Position.Y - currentShapeStart.Y;
 
-                // Handle moving in negative directions
+                // New width of the object
                 if(objectWidth < 0) {
-                    // Todo check out of boundary coordinates
                     Canvas.SetLeft(currentShape, currentShapeStart.X + objectWidth);
                     currentShape.Width = objectWidth * -1;
                 }
@@ -95,8 +92,8 @@ namespace BreakOut_view {
                     currentShape.Width = objectWidth;
                 }
 
+                // New height of the object
                 if(objectHeight < 0) {
-                    // Todo check out of boundary coordinates
                     Canvas.SetTop(currentShape, currentShapeStart.Y + objectHeight);
                     currentShape.Height = objectHeight * -1;
                 }
