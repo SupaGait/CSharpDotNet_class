@@ -1,4 +1,6 @@
-﻿using BreakOut_view.Shapes;
+﻿using BreakOut_logic;
+using BreakOut_logic.Objects;
+using BreakOut_view.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +15,13 @@ namespace BreakOut_view {
         private Canvas gameScreen;
         private PrintDebugMessage debugMessage;
 
-        private Shape currentShape;
+        private DrawableObject currentObject;
         private Point currentShapeStart;
+        private Level level;
 
         // Save the screen for drawing and the delegate to print messages
-        public DrawObjects(Canvas gameScreen, PrintDebugMessage debugMessage){
+        public DrawObjects(Level level, Canvas gameScreen, PrintDebugMessage debugMessage){
+            this.level = level;
             this.gameScreen = gameScreen;
             this.debugMessage = debugMessage;
         }
@@ -42,27 +46,34 @@ namespace BreakOut_view {
             debugMessage("Pressed!");
 
             // New object
-            if(currentShape == null) { 
+            if(currentObject == null) { 
 
                 // Pointer location
                 Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
             
                 // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
-                currentShape = ShapeFactory.createShape(ShapeFactory.objectShape.SimpleBrickShape);
-                currentShape.Width = 0;
-                currentShape.Height = 0;
+                currentObject = ShapeFactory.createShape(ShapeFactory.objectShape.SimpleBrickShape);
+                currentObject.Shape.Width = 0;
+                currentObject.Shape.Height = 0;
                 currentShapeStart.X = point.Position.X;
                 currentShapeStart.Y = point.Position.Y;
-                Canvas.SetLeft(currentShape, point.Position.X);
-                Canvas.SetTop(currentShape, point.Position.Y);
+                Canvas.SetLeft(currentObject.Shape, point.Position.X);
+                Canvas.SetTop(currentObject.Shape, point.Position.Y);
 
                 // Add the new shape to the canvas, and set initial position
-                gameScreen.Children.Add(currentShape);
+                gameScreen.Children.Add(currentObject.Shape);
             }
             else {
                 // Finish current object
                 // Todo
-                currentShape = null;
+                float x = (float)Canvas.GetLeft(currentObject.Shape);
+                float y = (float)Canvas.GetTop(currentObject.Shape);
+                var size = new System.Numerics.Vector2((float)currentObject.Shape.Width, (float)currentObject.Shape.Height);
+                var position = new System.Numerics.Vector2(x, y);
+                BaseObject newObject =  new BaseObject(ObjectType.BrickType, position, size, true);
+
+                level.addObject(newObject);
+                currentObject = null;
             }
         }
         private void GameScreen_PointerReleased(object sender, PointerRoutedEventArgs e) {
@@ -79,26 +90,26 @@ namespace BreakOut_view {
             debugMessage(message);
 
             // Draw/Update the new object
-            if (currentShape != null) {
+            if (currentObject != null) {
                 double objectWidth = point.Position.X - currentShapeStart.X;
                 double objectHeight = point.Position.Y - currentShapeStart.Y;
 
                 // New width of the object
                 if(objectWidth < 0) {
-                    Canvas.SetLeft(currentShape, currentShapeStart.X + objectWidth);
-                    currentShape.Width = objectWidth * -1;
+                    Canvas.SetLeft(currentObject.Shape, currentShapeStart.X + objectWidth);
+                    currentObject.Shape.Width = objectWidth * -1;
                 }
                 else {
-                    currentShape.Width = objectWidth;
+                    currentObject.Shape.Width = objectWidth;
                 }
 
                 // New height of the object
                 if(objectHeight < 0) {
-                    Canvas.SetTop(currentShape, currentShapeStart.Y + objectHeight);
-                    currentShape.Height = objectHeight * -1;
+                    Canvas.SetTop(currentObject.Shape, currentShapeStart.Y + objectHeight);
+                    currentObject.Shape.Height = objectHeight * -1;
                 }
                 else {
-                    currentShape.Height = objectHeight;
+                    currentObject.Shape.Height = objectHeight;
                 }
             }
         }

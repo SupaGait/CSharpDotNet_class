@@ -19,11 +19,11 @@ namespace BreakOut_view.Shapes {
             SimpleBrickShape,
         };
 
-        static public Shape createShape(objectShape objectShape/*, Size size*/) {
-            Shape shape = null;
+        static public DrawableObject createShape(objectShape objectShape/*, Size size*/) {
+            DrawableObject newObject = new DrawableObject();
             switch (objectShape) {
                 case objectShape.PaddleShape: {
-                        shape = new Rectangle() {
+                        newObject.Shape = new Rectangle() {
                             Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 0, 0)),
                             Stroke = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255)),
                             StrokeThickness = 1.0
@@ -31,13 +31,13 @@ namespace BreakOut_view.Shapes {
                         break;
                     }
                 case objectShape.BallShape: {
-                        shape = new Ellipse() {
+                        newObject.Shape = new Ellipse() {
                             Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 255, 0))
                         };
                         break;
                     }
                 case objectShape.SimpleBrickShape: {
-                        shape = new Rectangle() {
+                        newObject.Shape = new Rectangle() {
                             Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 0, 0)),
                             Stroke = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255)),
                             StrokeThickness = 1.0
@@ -45,7 +45,7 @@ namespace BreakOut_view.Shapes {
                         break;
                     }
             }
-            return shape;
+            return newObject;
         }
     }
 }

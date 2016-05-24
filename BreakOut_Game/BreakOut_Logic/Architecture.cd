@@ -42,15 +42,8 @@
   <Class Name="BreakOut_logic.Level">
     <Position X="9" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAAAABABAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAAAABAFAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Level.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BreakOut_logic.LevelBuilder">
-    <Position X="8.5" Y="8.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>LevelBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelCreator">
@@ -106,7 +99,7 @@
   <Class Name="BreakOut_logic.Objects.BaseObject" Collapsed="true">
     <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACABAAQoAAgAIAAIAACEABAAAAAAIAAACgAAAA=</HashCode>
+      <HashCode>AAAAAACABAAAoAAgAIAAIAACAABAAAAAAIAAAAgAAAA=</HashCode>
       <FileName>Objects\BaseObject.cs</FileName>
     </TypeIdentifier>
   </Class>

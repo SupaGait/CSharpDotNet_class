@@ -14,6 +14,10 @@ namespace BreakOut_logic {
             }
         }
 
+        public void addObject(BaseObject newObject) {
+
+        }
+
         public void Load() {
             throw new System.NotImplementedException();
         }

@@ -30,8 +30,8 @@ namespace BreakOut_view
     public sealed partial class GamePage : Page, IDrawComponents
     {
         Game theGame;
-        Shape paddleShape;
-        Shape ballShape;
+        DrawableObject paddle;
+        DrawableObject ball;
 
         public static float menuSize = 200;
         public static Size windowSize = new Size(1280, 720);
@@ -48,10 +48,10 @@ namespace BreakOut_view
             theGame = new Game(this, 1, new Size(windowSize.Width - menuSize, windowSize.Height));
 
             // Create default objects
-            paddleShape = createShape(objectShape.PaddleShape);
-            GameScreen.Children.Add(paddleShape);
-            ballShape = createShape(objectShape.BallShape);
-            GameScreen.Children.Add(ballShape);
+            paddle = createShape(objectShape.PaddleShape);
+            GameScreen.Children.Add(paddle.Shape);
+            ball = createShape(objectShape.BallShape);
+            GameScreen.Children.Add(ball.Shape);
         }
 
         // If navigated to here, check the reason
@@ -68,24 +68,24 @@ namespace BreakOut_view
         #region drawing
         public void drawPaddle(Paddle paddle) {
             // Sizing
-            paddleShape.Width = paddle.Size.X;
-            paddleShape.Height = paddle.Size.Y;
+            this.paddle.Shape.Width = paddle.Size.X;
+            this.paddle.Shape.Height = paddle.Size.Y;
 
             // Positioning
-            Canvas.SetLeft(paddleShape, paddle.Position.X);
-            Canvas.SetTop(paddleShape, paddle.Position.Y);
+            Canvas.SetLeft(this.paddle.Shape, paddle.Position.X);
+            Canvas.SetTop(this.paddle.Shape, paddle.Position.Y);
         }
         public void drawBricks(List<Brick> bricks) {
             throw new NotImplementedException();
         }
         public void drawBall(Ball ball) {
             // Sizing
-            ballShape.Width = ball.Size.X;
-            ballShape.Height = ball.Size.Y;
+            this.ball.Shape.Width = ball.Size.X;
+            this.ball.Shape.Height = ball.Size.Y;
 
             // Positioning
-            Canvas.SetLeft(ballShape, ball.Position.X);
-            Canvas.SetTop(ballShape, ball.Position.Y);
+            Canvas.SetLeft(this.ball.Shape, ball.Position.X);
+            Canvas.SetTop(this.ball.Shape, ball.Position.Y);
         }
         #endregion //drawing
 

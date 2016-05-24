@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BreakOut_logic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,13 +24,15 @@ namespace BreakOut_view {
         private DrawObjects drawObjects;
         private SelectObjects selectObjects;
         private PointerModeAction selectedMode;
+        private Level level;
 
         public CreateLevelPage() {
             this.InitializeComponent();
 
             // Create the objects
-            drawObjects = new DrawObjects(GameScreen, debugMessage);
-            selectObjects = new SelectObjects(GameScreen, debugMessage);
+            level = new Level();
+            drawObjects = new DrawObjects(level, GameScreen, debugMessage);
+            selectObjects = new SelectObjects(level, GameScreen, debugMessage);
 
             // Start in drawMode
             selectedMode = drawObjects;
