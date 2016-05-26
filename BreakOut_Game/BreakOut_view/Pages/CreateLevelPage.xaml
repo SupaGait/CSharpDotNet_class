@@ -15,6 +15,7 @@
             <Button x:Name="button_saveLevel" Content="Save level" Height="35" Canvas.Left="1049" Canvas.Top="608" Width="139"/>
             <Button x:Name="button_home" Content="Return to main menu" Height="42" Canvas.Left="1034" Canvas.Top="654" Width="171" Click="button_home_Click"/>
             <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Height="146" Width="272"/>
+            <Button x:Name="button_testLevel" Content="Test level" Height="42" Canvas.Left="868" Canvas.Top="654" Width="125" Click="button_testLevel_Click" />
             <!--<Rectangle Canvas.Left="30" Canvas.Top="30" 
        Fill="Red" Width="200" Height="200" />
             <Canvas.Resources>

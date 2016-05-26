@@ -80,5 +80,9 @@ namespace BreakOut_view {
             setMode(PointerMode.SelectMode);
             debugMessage("Switched to selectMode");
         }
+
+        private void button_testLevel_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(GamePage), level);
+        }
     }
 }

@@ -64,15 +64,17 @@ namespace BreakOut_view {
                 gameScreen.Children.Add(currentObject.Shape);
             }
             else {
-                // Finish current object
-                // Todo
+                // Create a new game object (Brick atm)
                 float x = (float)Canvas.GetLeft(currentObject.Shape);
                 float y = (float)Canvas.GetTop(currentObject.Shape);
                 var size = new System.Numerics.Vector2((float)currentObject.Shape.Width, (float)currentObject.Shape.Height);
                 var position = new System.Numerics.Vector2(x, y);
-                BaseObject newObject =  new BaseObject(ObjectType.BrickType, position, size, true);
+                //BaseObject newObject =  new BaseObject(ObjectType.BrickType, position, size, true);
+                Brick newBrick = new Brick(position, size, true);
 
-                level.addObject(newObject);
+                // Add the base object to the level, no more object selected
+                //level.addObject(newObject);
+                level.addBrick(newBrick);
                 currentObject = null;
             }
         }

@@ -4,18 +4,20 @@ using System.Collections.Generic;
 namespace BreakOut_logic {
     public class Level {
         private int remainingBricks;
-        private List<Brick> bricks;
+        private List<BaseObject> BaseObjects { get; set; }
+        public List<Brick> Bricks { get; set;}
 
-        public List<Brick> Bricks {
-            get {
-                return bricks;
-            }
-            set {
-            }
+        public Level() {
+            Bricks = new List<Brick>();
+            BaseObjects = new List<BaseObject>();
         }
 
         public void addObject(BaseObject newObject) {
+            BaseObjects.Add(newObject);
+        }
 
+        public void addBrick(Brick newBrick) {
+            Bricks.Add(newBrick);
         }
 
         public void Load() {

@@ -118,7 +118,6 @@
     <Compile Include="IDrawComponents.cs" />
     <Compile Include="IPaddleFeature.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="LevelCreator.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="Objects\Paddle.cs" />
     <Compile Include="Objects\SurroundingBox.cs" />

@@ -55,7 +55,7 @@ namespace BreakOut_logic {
                 // Draw
                 drawer.drawPaddle(paddle);
                 drawer.drawBall(ball);
-                //drawer.drawBricks(levelManager.Level.Bricks);
+                drawer.drawBricks(levelManager.Level.Bricks);
             }
         }
 

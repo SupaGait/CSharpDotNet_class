@@ -5,15 +5,9 @@ using System.Text;
 
 namespace BreakOut_logic {
     public class LevelManager {
-        private Level currentLevel;
-
-        public Level Level {
-            get {
-                throw new System.NotImplementedException();
-            }
-
-            set {
-            }
+        public Level Level { get; set; }
+        public LevelManager() {
+            Level = new Level();
         }
 
         public void load() {

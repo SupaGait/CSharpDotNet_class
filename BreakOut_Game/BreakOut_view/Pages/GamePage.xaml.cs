@@ -29,9 +29,10 @@ namespace BreakOut_view
     /// </summary>
     public sealed partial class GamePage : Page, IDrawComponents
     {
-        Game theGame;
-        DrawableObject paddle;
-        DrawableObject ball;
+        private Game theGame;
+        private DrawableObject paddleDrawObject;
+        private DrawableObject ballDrawObject;
+        private List<DrawableObject> brickDrawObjects = new List<DrawableObject>();
 
         public static float menuSize = 200;
         public static Size windowSize = new Size(1280, 720);
@@ -48,14 +49,22 @@ namespace BreakOut_view
             theGame = new Game(this, 1, new Size(windowSize.Width - menuSize, windowSize.Height));
 
             // Create default objects
-            paddle = createShape(objectShape.PaddleShape);
-            GameScreen.Children.Add(paddle.Shape);
-            ball = createShape(objectShape.BallShape);
-            GameScreen.Children.Add(ball.Shape);
+            paddleDrawObject = createShape(objectShape.PaddleShape);
+            GameScreen.Children.Add(paddleDrawObject.Shape);
+            ballDrawObject = createShape(objectShape.BallShape);
+            GameScreen.Children.Add(ballDrawObject.Shape);
         }
+
+        #region navigation
 
         // If navigated to here, check the reason
         protected override void OnNavigatedTo(NavigationEventArgs e) {
+
+            // Check if we want to test a level
+            if ( e.Parameter is Level) {
+                Level level = e.Parameter as Level;
+                theGame.LevelManager.Level = level;
+            }
             theGame.Start();
         }
 
@@ -64,35 +73,45 @@ namespace BreakOut_view
             theGame.Pauze();
             base.OnNavigatedFrom(e);
         }
+        #endregion // navigation
 
         #region drawing
         public void drawPaddle(Paddle paddle) {
             // Sizing
-            this.paddle.Shape.Width = paddle.Size.X;
-            this.paddle.Shape.Height = paddle.Size.Y;
+            this.paddleDrawObject.Shape.Width = paddle.Size.X;
+            this.paddleDrawObject.Shape.Height = paddle.Size.Y;
 
             // Positioning
-            Canvas.SetLeft(this.paddle.Shape, paddle.Position.X);
-            Canvas.SetTop(this.paddle.Shape, paddle.Position.Y);
+            Canvas.SetLeft(this.paddleDrawObject.Shape, paddle.Position.X);
+            Canvas.SetTop(this.paddleDrawObject.Shape, paddle.Position.Y);
         }
         public void drawBricks(List<Brick> bricks) {
-            throw new NotImplementedException();
+            foreach(DrawableObject brickDrawObject in brickDrawObjects) {
+                // todo: Connect DrawObject to BaseObject?
+            }
+            //throw new NotImplementedException();
         }
         public void drawBall(Ball ball) {
             // Sizing
-            this.ball.Shape.Width = ball.Size.X;
-            this.ball.Shape.Height = ball.Size.Y;
+            this.ballDrawObject.Shape.Width = ball.Size.X;
+            this.ballDrawObject.Shape.Height = ball.Size.Y;
+
+            // Transform the ball to the new position
+            var curX = Canvas.GetLeft(this.ballDrawObject.Shape);
+            var curY = Canvas.GetTop(this.ballDrawObject.Shape);
+            var transform = new TranslateTransform(); //TODO: attach transform to DrawObject instead of recreating.
+            transform.X = ball.Position.X - curX;
+            transform.Y = ball.Position.Y - curY;
+            this.ballDrawObject.Shape.RenderTransform = transform;
+
 
             // Positioning
-            Canvas.SetLeft(this.ball.Shape, ball.Position.X);
-            Canvas.SetTop(this.ball.Shape, ball.Position.Y);
+            //Canvas.SetLeft(this.ballDrawObject.Shape, ball.Position.X);
+            //Canvas.SetTop(this.ballDrawObject.Shape, ball.Position.Y);
         }
         #endregion //drawing
 
-        private void UpdateGUI_Tick(object sender, object e) {
-            //theGame.Paddle.Position
-        }
-
+        #region events
         private void GameScreen_PointerMoved(object sender, PointerRoutedEventArgs e) {
             Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(GameScreen);
             theGame.Paddle.setUserPosition((float)point.Position.X, (float)point.Position.Y);
@@ -114,5 +133,7 @@ namespace BreakOut_view
         private void button_home_Click(object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(StartPage), this);
         }
+
+        #endregion //events
     }
 }
