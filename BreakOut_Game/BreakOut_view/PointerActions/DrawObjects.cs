@@ -17,10 +17,10 @@ namespace BreakOut_view {
 
         private DrawableObject currentObject;
         private Point currentShapeStart;
-        private Level level;
+        private Wall level;
 
         // Save the screen for drawing and the delegate to print messages
-        public DrawObjects(Level level, Canvas gameScreen, PrintDebugMessage debugMessage){
+        public DrawObjects(Wall level, Canvas gameScreen, PrintDebugMessage debugMessage){
             this.level = level;
             this.gameScreen = gameScreen;
             this.debugMessage = debugMessage;

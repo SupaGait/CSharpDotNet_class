@@ -39,11 +39,11 @@
       <Property Name="CollisionObjectsManager" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="BreakOut_logic.Level">
-    <Position X="8.5" Y="4.75" Width="1.5" />
+  <Class Name="BreakOut_logic.Wall">
+    <Position X="8.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAABAFAAAgACAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Level.cs</FileName>
+      <FileName>Wall.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BreakOut_logic.LevelManager">

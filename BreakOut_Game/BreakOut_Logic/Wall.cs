@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 
 namespace BreakOut_logic {
-    public class Level {
+    public class Wall {
         private int remainingBricks;
         private List<BaseObject> BaseObjects { get; set; }
         public List<Brick> Bricks { get; set;}
 
-        public Level() {
+        public Wall() {
             Bricks = new List<Brick>();
             BaseObjects = new List<BaseObject>();
         }

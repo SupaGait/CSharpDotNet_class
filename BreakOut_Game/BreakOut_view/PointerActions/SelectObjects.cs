@@ -9,10 +9,10 @@ namespace BreakOut_view {
     public class SelectObjects : PointerModeAction {
         private Canvas gameScreen;
         private PrintDebugMessage debugMessage;
-        private Level level;
+        private Wall level;
 
         // Save the screen for drawing and the delegate to print messages
-        public SelectObjects(Level level, Canvas gameScreen, PrintDebugMessage debugMessage){
+        public SelectObjects(Wall level, Canvas gameScreen, PrintDebugMessage debugMessage){
             this.level = level;
             this.gameScreen = gameScreen;
             this.debugMessage = debugMessage;

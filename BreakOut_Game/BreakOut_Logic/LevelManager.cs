@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BreakOut_logic {
     public class LevelManager {
-        public Level Level { get; set; }
+        public Wall Level { get; set; }
         public LevelManager() {
-            Level = new Level();
+            Level = new Wall();
         }
 
         public void load() {

@@ -61,8 +61,8 @@ namespace BreakOut_view
         protected override void OnNavigatedTo(NavigationEventArgs e) {
 
             // Check if we want to test a level
-            if ( e.Parameter is Level) {
-                Level level = e.Parameter as Level;
+            if ( e.Parameter is Wall) {
+                Wall level = e.Parameter as Wall;
                 theGame.LevelManager.Level = level;
             }
             theGame.Start();
@@ -86,10 +86,44 @@ namespace BreakOut_view
             Canvas.SetTop(this.paddleDrawObject.Shape, paddle.Position.Y);
         }
         public void drawBricks(List<Brick> bricks) {
-            foreach(DrawableObject brickDrawObject in brickDrawObjects) {
-                // todo: Connect DrawObject to BaseObject?
+            List<Brick> bricksToUpdate = new List<Brick>(bricks);
+            List<DrawableObject> brickObjectsToDestroy = new List<DrawableObject>();
+
+            // Update all visual brickObjects
+            foreach (DrawableObject brickObject in brickDrawObjects) {
+                bool brickIsFound = false;
+                foreach (Brick brick in bricksToUpdate) {
+                    // Update the brick object if nessecary
+                    if (brick.GetId == brickObject.Id) {
+                        // TODO: update if necessary
+                        bricksToUpdate.Remove(brick);
+                        brickIsFound = true;
+                        break;
+                    }
+                }
+                if (!brickIsFound) {
+                    brickObjectsToDestroy.Add(brickObject);
+                }
             }
-            //throw new NotImplementedException();
+
+            // Delete the unused visual object
+            foreach (DrawableObject brickObject in brickObjectsToDestroy) {
+                brickDrawObjects.Remove(brickObject);
+            }
+            
+            // Create and Add new bricks
+            foreach (Brick newBrick in bricksToUpdate) {
+                // Create the object
+                DrawableObject brickDrawObject = createShape(objectShape.SimpleBrickShape);
+                brickDrawObjects.Add(brickDrawObject);
+                brickDrawObject.Shape.Height = newBrick.Size.Y;
+                brickDrawObject.Shape.Width = newBrick.Size.X;
+
+                // Position on cavas
+                GameScreen.Children.Add(brickDrawObject.Shape);
+                Canvas.SetLeft(brickDrawObject.Shape, newBrick.Position.X);
+                Canvas.SetTop(brickDrawObject.Shape, newBrick.Position.Y);
+            }
         }
         public void drawBall(Ball ball) {
             // Sizing
@@ -104,10 +138,6 @@ namespace BreakOut_view
             transform.Y = ball.Position.Y - curY;
             this.ballDrawObject.Shape.RenderTransform = transform;
 
-
-            // Positioning
-            //Canvas.SetLeft(this.ballDrawObject.Shape, ball.Position.X);
-            //Canvas.SetTop(this.ballDrawObject.Shape, ball.Position.Y);
         }
         #endregion //drawing
 

@@ -24,13 +24,13 @@ namespace BreakOut_view {
         private DrawObjects drawObjects;
         private SelectObjects selectObjects;
         private PointerModeAction selectedMode;
-        private Level level;
+        private Wall level;
 
         public CreateLevelPage() {
             this.InitializeComponent();
 
             // Create the objects
-            level = new Level();
+            level = new Wall();
             drawObjects = new DrawObjects(level, GameScreen, debugMessage);
             selectObjects = new SelectObjects(level, GameScreen, debugMessage);
 
