@@ -31,6 +31,11 @@ namespace BreakOut_logic.Objects {
                     if (collisioObject.ObjectType == ObjectType.SurroundingType) {
                         (collisioObject as SurroundingBox).getNewBallAngle(this);
                     }
+                    // Check for brick
+                    if (collisioObject.ObjectType == ObjectType.BrickType) {
+                        (collisioObject as Brick).getNewBallAngle(this);
+                        (collisioObject as Brick).InflictDamage(1);
+                    }
                 }
             }
         }

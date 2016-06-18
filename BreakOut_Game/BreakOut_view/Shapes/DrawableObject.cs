@@ -3,6 +3,6 @@
 namespace BreakOut_view {
     class DrawableObject {
         public Shape Shape { get; set; }
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

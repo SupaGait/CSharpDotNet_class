@@ -11,6 +11,10 @@ namespace BreakOut_logic {
             collisionObjects.Add(collisionObject);
         }
 
+        public void removeObject(CollisionObject collisionObject) {
+            collisionObjects.Remove(collisionObject);
+        }
+
         // Run through all known collision objects and check for a collision with the given object
         public List<CollisionObject> checkCollision(BaseObject objectToCheck) {
             List<CollisionObject> objectsInCollision = new List<CollisionObject>();

@@ -10,19 +10,28 @@ using Windows.UI.Xaml;
 
 namespace BreakOut_logic {
     public class Game {
+        
+        // Managers
+        public Status Status { get; }
+        public LevelManager LevelManager { get; }
+        private CollisionManager collisionObjectsManager { get; }
+
         // Game Objects
         private Paddle paddle;
         private Ball ball;
         private SurroundingBox surroundingBox;
-
-        // Game logic
-        private Status status = new Status();
-        private LevelManager levelManager = new LevelManager();
-        private CollisionManager collisionObjectsManager = new CollisionManager();
-        private DispatcherTimer timer = new DispatcherTimer();
+     
+        // Logic
+        private DispatcherTimer timer;
         private IDrawComponents drawer;
 
         public Game(IDrawComponents drawer, int updateTime_ms, Size gameScreenSize) {
+            // Game logic
+            Status = new Status();
+            collisionObjectsManager = new CollisionManager();
+            LevelManager = new LevelManager(collisionObjectsManager);
+            timer = new DispatcherTimer();
+
             // Configurate the timer
             timer.Tick += updateGameTimout;
             timer.Interval = new TimeSpan(0, 0, 0, 0, updateTime_ms);
@@ -47,39 +56,28 @@ namespace BreakOut_logic {
         private void updateGameTimout(object sender, object e) {
             float elapsedTimeMs = (float)(sender as DispatcherTimer).Interval.TotalMilliseconds;
 
-            if (status.GameStatus == GameStatus.GameRunningStatus) { 
+            if (Status.GameStatus == GameStatus.GameRunningStatus) {
                 // Update    
                 ball.update(elapsedTimeMs);
                 paddle.update(elapsedTimeMs);
+                LevelManager.update();
 
                 // Draw
                 drawer.drawPaddle(paddle);
                 drawer.drawBall(ball);
-                drawer.drawBricks(levelManager.Level.Bricks);
+                drawer.drawBricks(LevelManager.Level.Bricks);
             }
         }
 
-        public Paddle Paddle {
-            get { return paddle; }
-        }
-        public Ball Ball {
-            get { return ball; }
-        }
-
-        public Status Status {
-            get { return status; }
-        }
-
-        public LevelManager LevelManager {
-            get { return levelManager; }
+        public void setPaddlePosition(float xPostion, float yPosition) {
+            paddle.setUserPosition(xPostion, yPosition);
         }
 
         public void Start() {
-            status.newGame();
+            Status.newGame();
         }
-
         public void Pauze() {
-            status.pauzeGame();
+            Status.pauzeGame();
         }
 
         public void Reset() {

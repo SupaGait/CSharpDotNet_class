@@ -94,7 +94,7 @@ namespace BreakOut_view
                 bool brickIsFound = false;
                 foreach (Brick brick in bricksToUpdate) {
                     // Update the brick object if nessecary
-                    if (brick.GetId == brickObject.Id) {
+                    if (brick.Id == brickObject.Id) {
                         // TODO: update if necessary
                         bricksToUpdate.Remove(brick);
                         brickIsFound = true;
@@ -108,6 +108,7 @@ namespace BreakOut_view
 
             // Delete the unused visual object
             foreach (DrawableObject brickObject in brickObjectsToDestroy) {
+                GameScreen.Children.Remove(brickObject.Shape);
                 brickDrawObjects.Remove(brickObject);
             }
             
@@ -115,6 +116,7 @@ namespace BreakOut_view
             foreach (Brick newBrick in bricksToUpdate) {
                 // Create the object
                 DrawableObject brickDrawObject = createShape(objectShape.SimpleBrickShape);
+                brickDrawObject.Id = newBrick.Id;
                 brickDrawObjects.Add(brickDrawObject);
                 brickDrawObject.Shape.Height = newBrick.Size.Y;
                 brickDrawObject.Shape.Width = newBrick.Size.X;
@@ -144,7 +146,7 @@ namespace BreakOut_view
         #region events
         private void GameScreen_PointerMoved(object sender, PointerRoutedEventArgs e) {
             Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(GameScreen);
-            theGame.Paddle.setUserPosition((float)point.Position.X, (float)point.Position.Y);
+            theGame.setPaddlePosition((float)point.Position.X, (float)point.Position.Y);
         }
 
         //Todo: for rescaling feature..
