@@ -11,29 +11,35 @@ namespace BreakOut_logic {
     }
 
     public class Status {
-        private GameStatus gameStatus = GameStatus.GameStartupStatus;
-        private int currentLevel = 0;
-        private int score = 0;
-        private float timeLeft_sec = 0;
+        public GameStatus GameStatus { get; set; }
+        public int CurrentLevel { get; set; }
+        public int Score { get; set; }
+        public float TimeLeft_sec { get; set; }
+        public bool TestingGame { get; set; }
+        public int RemainingBricks { get; set; }
 
-        public void update(float elapsedTimeMs) {
-            throw new System.NotImplementedException();
+        public Status() {
+            GameStatus = GameStatus.GameStartupStatus;
         }
-        public GameStatus GameStatus {
-           get { return gameStatus;  }
+        public void runTestGame() {
+            TestingGame = true;
+            CurrentLevel = 99;
+            Score = 0;
+            GameStatus = GameStatus.GameRunningStatus;
         }
-        public void newGame() {
+        public void runGame() {
             // Reset all score and start the game
-            currentLevel = 0;
-            score = 0;
-            timeLeft_sec = 60 * 5;
-            gameStatus = GameStatus.GameRunningStatus;
+            TestingGame = false;
+            CurrentLevel = 1;
+            Score = 0;
+            TimeLeft_sec = 60 * 5;
+            GameStatus = GameStatus.GameRunningStatus;
         }
         internal void pauzeGame() {
-            gameStatus = GameStatus.GamePauzedStatus;
+            GameStatus = GameStatus.GamePauzedStatus;
         }
         internal void resumeGame() {
-            gameStatus = GameStatus.GameRunningStatus;
+            GameStatus = GameStatus.GameRunningStatus;
         }
     }
 }

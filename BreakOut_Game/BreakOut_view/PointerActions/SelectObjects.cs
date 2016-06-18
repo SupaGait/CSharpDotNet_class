@@ -12,8 +12,8 @@ namespace BreakOut_view {
         private Wall level;
 
         // Save the screen for drawing and the delegate to print messages
-        public SelectObjects(Wall level, Canvas gameScreen, PrintDebugMessage debugMessage){
-            this.level = level;
+        public SelectObjects(CreateLevelPage createLevelPage, Canvas gameScreen, PrintDebugMessage debugMessage){
+            this.level = createLevelPage.Level;
             this.gameScreen = gameScreen;
             this.debugMessage = debugMessage;
         }

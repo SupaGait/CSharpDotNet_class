@@ -3,7 +3,7 @@
   <Class Name="BreakOut_view.DrawObjects">
     <Position X="3.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACACQICAAAAAAQEAQAACAQAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACACQICAAAAAAQEAQAACAQgQAAAAAAA=</HashCode>
       <FileName>PointerActions\DrawObjects.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -20,10 +20,9 @@
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAAJIAAABAAAEAABAAAABAAABAAAA=</HashCode>
+      <HashCode>AgBAAAAAABAAAAAAAJIAAABAAAEAABAAAABAAABAAAA=</HashCode>
       <FileName>Pages\CreateLevelPage.xaml.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="BreakOut_view.PointerModeAction">
     <Position X="4.5" Y="0.75" Width="1.5" />
@@ -36,7 +35,7 @@
   <Class Name="BreakOut_view.GamePage" Collapsed="true">
     <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAACAAQCCAhAUAAAQAAAQAAIBAAgAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAgCAAQCCABAUAAAQAAAQIAIFAAAAAAAA=</HashCode>
       <FileName>Pages\GamePage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

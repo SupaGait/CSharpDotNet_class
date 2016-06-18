@@ -13,16 +13,19 @@ using Windows.UI.Xaml.Shapes;
 namespace BreakOut_view {
     public class DrawObjects : PointerModeAction {
         private Canvas gameScreen;
+        private Canvas gamePointer;
+
         private PrintDebugMessage debugMessage;
 
         private DrawableObject currentObject;
         private Point currentShapeStart;
-        private Wall level;
+        private CreateLevelPage createLevelPage;
 
         // Save the screen for drawing and the delegate to print messages
-        public DrawObjects(Wall level, Canvas gameScreen, PrintDebugMessage debugMessage){
-            this.level = level;
+        public DrawObjects(CreateLevelPage createLevelPage, Canvas gameScreen, Canvas gamePointer, PrintDebugMessage debugMessage){
+            this.createLevelPage = createLevelPage;
             this.gameScreen = gameScreen;
+            this.gamePointer = gamePointer;
             this.debugMessage = debugMessage;
         }
 
@@ -54,19 +57,39 @@ namespace BreakOut_view {
             return drawableObject;
         }
 
+        private Point snapToGrid(Point point) {
+            // Snap the X
+            int xPos = (int)point.X;
+            int xRemaining = xPos % createLevelPage.GridSize;
+            xPos -= xRemaining;
+            if (xRemaining > createLevelPage.HalfGridSize) {
+                xPos += createLevelPage.GridSize;
+            }
+            // Snap the Y
+            int yPos = (int)point.Y;
+            int yRemaining = yPos % createLevelPage.GridSize;
+            yPos -= yRemaining;
+            if (yRemaining > createLevelPage.HalfGridSize) {
+                yPos += createLevelPage.GridSize;
+            }
+            return new Point(xPos, yPos);
+        }
+
         #region events
         private void GameScreen_PointerPressed(object sender, PointerRoutedEventArgs e) {
             debugMessage("Pressed!");
-
             // New object
             if(currentObject == null) { 
                 // Pointer location
                 Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
 
+                // Snap it to grid
+                Point snappedPoint = snapToGrid(point.Position);
+
                 // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
-                currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, point.Position.X, point.Position.Y);
-                currentShapeStart.X = point.Position.X;
-                currentShapeStart.Y = point.Position.Y;
+                currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, snappedPoint.X, snappedPoint.Y);
+                currentShapeStart.X = snappedPoint.X;
+                currentShapeStart.Y = snappedPoint.Y;
             }
             else {
                 // Create a new game object (Brick atm)
@@ -79,7 +102,7 @@ namespace BreakOut_view {
 
                 // Add the base object to the level, no more object selected
                 //level.addObject(newObject);
-                level.addBrick(newBrick);
+                createLevelPage.Level.addBrick(newBrick);
                 currentObject = null;
             }
         }
@@ -93,13 +116,20 @@ namespace BreakOut_view {
 
             // Debug the position
             String message;
-            message = "X: "+point.Position.X.ToString() + "\nY: " + point.Position.Y.ToString();
+            message = "X: " + point.Position.X.ToString() + "\nY: " + point.Position.Y.ToString();
             debugMessage(message);
+
+            // Snap to grid
+            Point snappedPoint = snapToGrid(point.Position);
+
+            // Move the game pointer
+            Canvas.SetLeft(gamePointer, snappedPoint.X - gamePointer.Width/2);
+            Canvas.SetTop(gamePointer, point.Position.Y - gamePointer.Height/2);
 
             // Draw/Update the new object
             if (currentObject != null) {
-                double objectWidth = point.Position.X - currentShapeStart.X;
-                double objectHeight = point.Position.Y - currentShapeStart.Y;
+                double objectWidth = snappedPoint.X - currentShapeStart.X;
+                double objectHeight = snappedPoint.Y - currentShapeStart.Y;
 
                 // New width of the object
                 if(objectWidth < 0) {

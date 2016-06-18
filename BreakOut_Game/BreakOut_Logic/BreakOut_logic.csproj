@@ -108,6 +108,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LevelLoader.cs" />
     <Compile Include="Objects\BaseObject.cs" />
     <Compile Include="Objects\CollisionObject.cs" />
     <Compile Include="CollisionObjectsManager.cs" />

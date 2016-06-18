@@ -27,9 +27,9 @@ namespace BreakOut_logic {
 
         public Game(IDrawComponents drawer, int updateTime_ms, Size gameScreenSize) {
             // Game logic
-            Status = new Status();
             collisionObjectsManager = new CollisionManager();
-            LevelManager = new LevelManager(collisionObjectsManager);
+            Status = new Status();
+            LevelManager = new LevelManager(collisionObjectsManager, Status);
             timer = new DispatcherTimer();
 
             // Configurate the timer
@@ -44,8 +44,8 @@ namespace BreakOut_logic {
             surroundingBox = new SurroundingBox(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
 
             // Create objects
-            ball = new Ball(collisionObjectsManager);
             paddle = new Paddle(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
+            ball = new Ball(paddle, collisionObjectsManager);
             ball.Position = new Vector2((float)gameScreenSize.Width / 2, (float)gameScreenSize.Height / 2);
 
             // Add default objects to collision manager
@@ -74,7 +74,12 @@ namespace BreakOut_logic {
         }
 
         public void start() {
-            Status.newGame();
+            Status.runTestGame();
+        }
+        public void startScenario() {
+            Status.pauzeGame();
+            LevelManager.loadNewScenario();
+            Status.runGame();
         }
         public void pauze() {
             Status.pauzeGame();
@@ -83,6 +88,9 @@ namespace BreakOut_logic {
             if(Status.GameStatus == GameStatus.GamePauzedStatus) {
                 Status.resumeGame();
             }
+        }
+        public void shootBall() {
+            ball.launchBall();
         }
 
         public void Reset() {
@@ -103,5 +111,7 @@ namespace BreakOut_logic {
                 return collisionObjectsManager;
             }
         }
+
+
     }
 }

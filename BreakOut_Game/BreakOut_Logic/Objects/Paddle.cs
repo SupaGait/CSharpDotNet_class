@@ -7,12 +7,14 @@ namespace BreakOut_logic.Objects {
         static Vector2 defaultSize = new Vector2(150, 30);
         private double speed = 0.0;
         private Vector2 userPosition = new Vector2(0, 0);
+        private Vector2 gameScreenSize;
+        private float maxXposition = 0;
 
         public Paddle(Vector2 gameScreenSize) : 
             base(ObjectType.PaddleType, new Vector2((gameScreenSize.X - defaultSize.X)/2, gameScreenSize.Y - defaultSize.Y), 
-                defaultSize, 
-                false) {
-            // Consturctor
+                defaultSize, false) {
+            this.gameScreenSize = gameScreenSize;
+            this.maxXposition = gameScreenSize.X - this.Size.X;
         }
 
         public BreakOut_logic.IPaddleFeature[] IPaddleFeature {
@@ -25,8 +27,16 @@ namespace BreakOut_logic.Objects {
 
         public void update(float elapsedTimeMs) {
             // Move the paddle to the location requested by the user
-            // Todo
-            Position = new Vector2(userPosition.X, Position.Y);
+
+            // Center the paddle under the position
+            Position = new Vector2(userPosition.X - this.Size.Y/2, Position.Y);
+            // Apply clipping
+            if (Position.X < 0) {
+                Position = new Vector2(0, Position.Y);
+            }
+            else if(Position.X > maxXposition) {
+                Position = new Vector2(maxXposition, Position.Y);
+            }
         }
 
         public void setUserPosition(float xPostion, float yPosition) {

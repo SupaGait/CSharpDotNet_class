@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,19 +27,28 @@ namespace BreakOut_view {
         private DrawObjects drawObjects;
         private SelectObjects selectObjects;
         private PointerModeAction selectedMode;
-        private Wall level;
+        private List<Line> grid = new List<Line>();
+
+        public Wall Level { get; set; }
+        public int GridSize { get; set; }
+        public int HalfGridSize { get; set; }
 
         public CreateLevelPage() {
             this.InitializeComponent();
-
+            
             // Create the objects
-            level = new Wall();
-            drawObjects = new DrawObjects(level, GameScreen, debugMessage);
-            selectObjects = new SelectObjects(level, GameScreen, debugMessage);
+            Level = new Wall();
+            drawObjects = new DrawObjects(this, GameScreen, gamePointer, debugMessage);
+            selectObjects = new SelectObjects(this, GameScreen, debugMessage);
 
             // Start in drawMode
             selectedMode = drawObjects;
             selectedMode.register();
+
+            GridSize = (int)slider_gridSize.Value;
+            HalfGridSize = GridSize / 2;
+
+            createGrid();
         }
 
         // Set the response of the interface based on the new mode
@@ -84,34 +94,20 @@ namespace BreakOut_view {
         }
 
         private void button_testLevel_Click(object sender, RoutedEventArgs e) {
-            this.Frame.Navigate(typeof(GamePage), level);
+            this.Frame.Navigate(typeof(GamePage), Level);
         }
 
         private async void button_saveLevel_Click(object sender, RoutedEventArgs e) {
-            // Create sample file; replace if exists.
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile levelFile = await storageFolder.CreateFileAsync("level.xml", CreationCollisionOption.ReplaceExisting);
-
-            // Serialize the level
-            XmlSerializer xs = new XmlSerializer(typeof(Wall));
-
-            // Write
-            using (Stream stream = await levelFile.OpenStreamForWriteAsync()) {
-                xs.Serialize(stream, level);
-            }
+            await LevelLoader.save(Level, textBox_levelName.Text+".xml");
             debugMessage("Level saved.");
         }
 
         private async void button_loadLevel_Click(object sender, RoutedEventArgs e) {
-            // Serialize the level
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            XmlSerializer xs = new XmlSerializer(typeof(Wall));
-            using (Stream stream = await storageFolder.OpenStreamForReadAsync("level.xml")) {
-                level = xs.Deserialize(stream) as Wall;
-            }
+            // Load the lelel
+            Level = await LevelLoader.load(textBox_levelName.Text + ".xml");
 
             // Draw the loaded level
-            foreach (var brick in level.Bricks) {
+            foreach (var brick in Level.Bricks) {
                 var drawObject = drawObjects.createAndAddObject(
                     Shapes.ShapeFactory.objectShape.SimpleBrickShape,
                     brick.Size.X, brick.Size.Y,
@@ -121,6 +117,49 @@ namespace BreakOut_view {
 
             debugMessage("Level loaded.");
             //debugMessage(ApplicationData.Current.LocalFolder.Path);
+        }
+
+        private void slider_gridSize_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
+            GridSize = (int)slider_gridSize.Value;
+            createGrid();
+        }
+
+        private void createGrid() {
+            // Destroy old grid
+            foreach (var gridLine in grid) {
+                GameScreen.Children.Remove(gridLine);
+            }
+            grid.Clear();
+
+            // Create new grid
+            // X
+            int screenHeight = (int)GameScreen.ActualHeight;
+            for (int xPos = 0; xPos < GameScreen.ActualWidth; xPos += GridSize) {
+                var verticalLine = new Line();
+                verticalLine.X1 = xPos;
+                verticalLine.Y1 = 0;
+                verticalLine.X2 = xPos;
+                verticalLine.Y2 = screenHeight;
+                verticalLine.Stroke = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 0, 0));
+                verticalLine.StrokeThickness = 1;
+
+                grid.Add(verticalLine);
+                GameScreen.Children.Add(verticalLine);
+            }
+            // Y
+            int screenWidth = (int)GameScreen.ActualWidth;
+            for (int yPos = 0; yPos < GameScreen.ActualHeight; yPos += GridSize) {
+                var horizontalLine = new Line();
+                horizontalLine.X1 = 0;
+                horizontalLine.Y1 = yPos;
+                horizontalLine.X2 = screenWidth;
+                horizontalLine.Y2 = yPos;
+                horizontalLine.Stroke = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 0, 0));
+                horizontalLine.StrokeThickness = 1;
+
+                grid.Add(horizontalLine);
+                GameScreen.Children.Add(horizontalLine);
+            }
         }
     }
 }

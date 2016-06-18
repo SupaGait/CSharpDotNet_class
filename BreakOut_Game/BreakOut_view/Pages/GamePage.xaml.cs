@@ -18,6 +18,7 @@ using BreakOut_view.Shapes;
 using static BreakOut_view.Shapes.ShapeFactory;
 using BreakOut_logic.Objects;
 using Windows.UI.ViewManagement;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -53,19 +54,40 @@ namespace BreakOut_view
             GameScreen.Children.Add(paddleDrawObject.Shape);
             ballDrawObject = createShape(objectShape.BallShape);
             GameScreen.Children.Add(ballDrawObject.Shape);
+
+            // Update stats regulary
+            var statsTimer = new DispatcherTimer();
+            statsTimer.Tick += StatsTimer_Tick;
+            statsTimer.Interval = new TimeSpan(0, 0, 0, 0, 100); // 100ms
+            statsTimer.Start();
+        }
+
+        private void StatsTimer_Tick(object sender, object e) {
+            score_textBlock.Text = theGame.Status.CurrentLevel.ToString();
+            bricksRemaining_textBlock.Text = theGame.Status.RemainingBricks.ToString();
         }
 
         #region navigation
 
         // If navigated to here, check the reason
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
-
-            // Check if we want to test a level
-            if ( e.Parameter is Wall) {
-                Wall level = e.Parameter as Wall;
-                theGame.LevelManager.Level = level;
+        protected override async void OnNavigatedTo(NavigationEventArgs e) {
+            try {
+                // Check if we want to test a level
+                if (e.Parameter is Wall) {
+                    Wall level = e.Parameter as Wall;
+                    theGame.LevelManager.Level = level;
+                    theGame.start();
+                }
+                else {
+                    // Normal (re)start
+                    theGame.startScenario();
+                }
             }
-            theGame.start();
+            catch (Exception ex) {
+                MessageDialog dialog = new MessageDialog("Error: " + ex.ToString());
+                await dialog.ShowAsync();
+            }
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e) {
@@ -148,6 +170,9 @@ namespace BreakOut_view
             Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(GameScreen);
             theGame.setPaddlePosition((float)point.Position.X, (float)point.Position.Y);
         }
+        private void GameScreen_PointerPressed(object sender, PointerRoutedEventArgs e) {
+            theGame.shootBall();
+        }
 
         //Todo: for rescaling feature..
         private void GameScreen_SizeChanged(object sender, SizeChangedEventArgs e) {
@@ -176,6 +201,7 @@ namespace BreakOut_view
                 button_pauze.Content = "Pauze";
             }
         }
+
         #endregion //events
 
 

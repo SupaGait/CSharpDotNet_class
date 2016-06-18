@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace BreakOut_logic {
     public class Wall {
         [XmlIgnore]
-        private int remainingBricks = 0;
+        public int RemainingBricks { get; set; }
 
         [XmlIgnore]
         private List<BaseObject> BaseObjects { get; set; }
@@ -25,7 +25,7 @@ namespace BreakOut_logic {
         }
 
         public void addBrick(Brick newBrick) {
-            remainingBricks++;
+            RemainingBricks++;
             Bricks.Add(newBrick);
         }
 
@@ -41,14 +41,10 @@ namespace BreakOut_logic {
             }
         }
 
-        public void Load() {
-            throw new System.NotImplementedException();
-        }
-
         public void update() {
             // Remove all bricks marked for destroy
             var destroyBricks = Bricks.FindAll(brick => brick.Destroy == true);
-            remainingBricks -= destroyBricks.Count;
+            RemainingBricks -= destroyBricks.Count;
             foreach (var brick in destroyBricks) {
                 CollisionManager.removeObject(brick);
                 Bricks.Remove(brick);

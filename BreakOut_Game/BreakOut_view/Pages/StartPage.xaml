@@ -7,9 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="NewGame" Content="New Game" HorizontalAlignment="Left" Margin="421,204,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="NewGame_Click"/>
-        <Button x:Name="CreateLevel" Content="Create Level" HorizontalAlignment="Left" Margin="421,364,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="CreateLevel_Click"/>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF8FDC31" Offset="0"/>
+                <GradientStop Color="#FFE6FFC8" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="NewGame" Content="New Game" HorizontalAlignment="Left" Margin="489,368,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="NewGame_Click" Foreground="Black" FontFamily="High Tower Text"/>
+        <Button x:Name="CreateLevel" Content="Create Level" HorizontalAlignment="Left" Margin="489,516,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="CreateLevel_Click" FontFamily="High Tower Text"/>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="168,100,167,0" TextWrapping="Wrap" Text="Block Breaker" VerticalAlignment="Top" Height="196" Width="945" FontSize="120" TextAlignment="Center" FontFamily="High Tower Text" Foreground="#FF6666C1"/>
 
     </Grid>
 </Page>
