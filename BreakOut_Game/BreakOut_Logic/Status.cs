@@ -32,5 +32,8 @@ namespace BreakOut_logic {
         internal void pauzeGame() {
             gameStatus = GameStatus.GamePauzedStatus;
         }
+        internal void resumeGame() {
+            gameStatus = GameStatus.GameRunningStatus;
+        }
     }
 }

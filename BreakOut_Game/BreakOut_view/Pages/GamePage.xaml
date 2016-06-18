@@ -15,6 +15,6 @@
             </Canvas.Resources>-->
         </Canvas>
         <Button x:Name="button_home" Content="Home" HorizontalAlignment="Left" Margin="1134,675,0,0" VerticalAlignment="Top" Height="35" Width="103" Click="button_home_Click"/>
-        <Button x:Name="button_pauze" Content="Pauze" HorizontalAlignment="Left" Margin="1134,591,0,0" VerticalAlignment="Top" Height="35" Width="103"/>
+        <Button x:Name="button_pauze" Content="Pauze" HorizontalAlignment="Left" Margin="1134,591,0,0" VerticalAlignment="Top" Height="35" Width="103" Click="button_pauze_Click"/>
     </Grid>
 </Page>

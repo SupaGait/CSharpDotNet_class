@@ -11,8 +11,8 @@
         <Canvas Background="White" x:Name="GameScreen" Width="1280" Height="720">
             <Button x:Name="button_draw" Content="Draw mode" Height="62" Canvas.Left="10" Canvas.Top="564" Width="139" Click="button_draw_Click"/>
             <Button x:Name="button_select" Content="Select mode" Height="62" Canvas.Left="10" Canvas.Top="648" Width="139" Click="button_select_Click"/>
-            <Button x:Name="button_loadLevel" Content="Load Level" Height="33" Canvas.Left="1049" Canvas.Top="564" Width="139"/>
-            <Button x:Name="button_saveLevel" Content="Save level" Height="35" Canvas.Left="1049" Canvas.Top="608" Width="139"/>
+            <Button x:Name="button_loadLevel" Content="Load Level" Height="33" Canvas.Left="1049" Canvas.Top="564" Width="139" Click="button_loadLevel_Click"/>
+            <Button x:Name="button_saveLevel" Content="Save level" Height="35" Canvas.Left="1049" Canvas.Top="608" Width="139" Click="button_saveLevel_Click"/>
             <Button x:Name="button_home" Content="Return to main menu" Height="42" Canvas.Left="1034" Canvas.Top="654" Width="171" Click="button_home_Click"/>
             <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Height="146" Width="272"/>
             <Button x:Name="button_testLevel" Content="Test level" Height="42" Canvas.Left="868" Canvas.Top="654" Width="125" Click="button_testLevel_Click" />

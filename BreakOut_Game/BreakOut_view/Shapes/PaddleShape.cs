@@ -12,7 +12,7 @@ namespace BreakOut_view.Shapes {
         }
     }
     */
-    class ShapeFactory {
+    public class ShapeFactory {
         public enum objectShape {
             PaddleShape = 0,
             BallShape,

@@ -7,6 +7,9 @@ namespace BreakOut_logic.Objects {
         public CollisionObject(ObjectType objectType, Vector2 position, Vector2 size, bool destroyable) :
             base(objectType, position, size, destroyable) {
         }
+
+        public CollisionObject() { }
+
         // Objects need to implement a collition check interface
         public abstract bool checkCollision(BaseObject collisionObject);
 

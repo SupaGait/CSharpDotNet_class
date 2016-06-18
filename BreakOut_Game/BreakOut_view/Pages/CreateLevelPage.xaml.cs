@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Serialization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -55,7 +57,7 @@ namespace BreakOut_view {
                         selectedMode = selectObjects;
                         break;
                     }
-                default:  {
+                default: {
                         throw new InvalidOperationException("Selected unavailable operation.");
                     }
             }
@@ -83,6 +85,42 @@ namespace BreakOut_view {
 
         private void button_testLevel_Click(object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(GamePage), level);
+        }
+
+        private async void button_saveLevel_Click(object sender, RoutedEventArgs e) {
+            // Create sample file; replace if exists.
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile levelFile = await storageFolder.CreateFileAsync("level.xml", CreationCollisionOption.ReplaceExisting);
+
+            // Serialize the level
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+
+            // Write
+            using (Stream stream = await levelFile.OpenStreamForWriteAsync()) {
+                xs.Serialize(stream, level);
+            }
+            debugMessage("Level saved.");
+        }
+
+        private async void button_loadLevel_Click(object sender, RoutedEventArgs e) {
+            // Serialize the level
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+            using (Stream stream = await storageFolder.OpenStreamForReadAsync("level.xml")) {
+                level = xs.Deserialize(stream) as Wall;
+            }
+
+            // Draw the loaded level
+            foreach (var brick in level.Bricks) {
+                var drawObject = drawObjects.createAndAddObject(
+                    Shapes.ShapeFactory.objectShape.SimpleBrickShape,
+                    brick.Size.X, brick.Size.Y,
+                    brick.Position.X, brick.Position.Y);
+                drawObject.Id = brick.Id;
+            }
+
+            debugMessage("Level loaded.");
+            //debugMessage(ApplicationData.Current.LocalFolder.Path);
         }
     }
 }

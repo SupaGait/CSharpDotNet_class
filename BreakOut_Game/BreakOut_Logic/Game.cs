@@ -73,11 +73,16 @@ namespace BreakOut_logic {
             paddle.setUserPosition(xPostion, yPosition);
         }
 
-        public void Start() {
+        public void start() {
             Status.newGame();
         }
-        public void Pauze() {
+        public void pauze() {
             Status.pauzeGame();
+        }
+        public void resume() {
+            if(Status.GameStatus == GameStatus.GamePauzedStatus) {
+                Status.resumeGame();
+            }
         }
 
         public void Reset() {

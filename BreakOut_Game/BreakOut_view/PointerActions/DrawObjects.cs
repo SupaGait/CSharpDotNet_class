@@ -41,27 +41,32 @@ namespace BreakOut_view {
         }
         #endregion // registration
 
+        public DrawableObject createAndAddObject(ShapeFactory.objectShape objectshape, double width, double height, double xPos, double yPos) {
+            DrawableObject drawableObject = ShapeFactory.createShape(objectshape);
+            drawableObject.Shape.Width = width;
+            drawableObject.Shape.Height = height;
+            Canvas.SetLeft(drawableObject.Shape, xPos);
+            Canvas.SetTop(drawableObject.Shape, yPos);
+            
+            // Add the new shape to the canvas, and set initial position
+            gameScreen.Children.Add(drawableObject.Shape);
+
+            return drawableObject;
+        }
+
         #region events
         private void GameScreen_PointerPressed(object sender, PointerRoutedEventArgs e) {
             debugMessage("Pressed!");
 
             // New object
             if(currentObject == null) { 
-
                 // Pointer location
                 Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
-            
+
                 // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
-                currentObject = ShapeFactory.createShape(ShapeFactory.objectShape.SimpleBrickShape);
-                currentObject.Shape.Width = 0;
-                currentObject.Shape.Height = 0;
+                currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, point.Position.X, point.Position.Y);
                 currentShapeStart.X = point.Position.X;
                 currentShapeStart.Y = point.Position.Y;
-                Canvas.SetLeft(currentObject.Shape, point.Position.X);
-                Canvas.SetTop(currentObject.Shape, point.Position.Y);
-
-                // Add the new shape to the canvas, and set initial position
-                gameScreen.Children.Add(currentObject.Shape);
             }
             else {
                 // Create a new game object (Brick atm)

@@ -9,6 +9,9 @@ namespace BreakOut_logic.Objects {
         public Brick(Vector2 position, Vector2 size, bool destroyable) : 
             base(ObjectType.BrickType, position, size, destroyable) {
         }
+        public Brick(){
+        }
+
         public override bool checkCollision(BaseObject collisionObject) {
             return checkSquareCollision(collisionObject, this);
         }

@@ -1,12 +1,18 @@
 ﻿using BreakOut_logic.Objects;
 using System.Collections.Generic;
-using System;
+using System.Xml.Serialization;
 
 namespace BreakOut_logic {
     public class Wall {
+        [XmlIgnore]
         private int remainingBricks = 0;
+
+        [XmlIgnore]
         private List<BaseObject> BaseObjects { get; set; }
+
         public List<Brick> Bricks { get; set;}
+
+        [XmlIgnore]
         public CollisionManager CollisionManager { get; set; }
 
         public Wall() {

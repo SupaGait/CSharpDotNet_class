@@ -65,12 +65,12 @@ namespace BreakOut_view
                 Wall level = e.Parameter as Wall;
                 theGame.LevelManager.Level = level;
             }
-            theGame.Start();
+            theGame.start();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e) {
             // When leaving, pauze the game
-            theGame.Pauze();
+            theGame.pauze();
             base.OnNavigatedFrom(e);
         }
         #endregion // navigation
@@ -166,6 +166,18 @@ namespace BreakOut_view
             this.Frame.Navigate(typeof(StartPage), this);
         }
 
+        private void button_pauze_Click(object sender, RoutedEventArgs e) {
+            if(theGame.Status.GameStatus == GameStatus.GameRunningStatus) {
+                theGame.pauze();
+                button_pauze.Content = "Resume";
+            }
+            else if(theGame.Status.GameStatus == GameStatus.GamePauzedStatus) {
+                theGame.resume();
+                button_pauze.Content = "Pauze";
+            }
+        }
         #endregion //events
+
+
     }
 }
