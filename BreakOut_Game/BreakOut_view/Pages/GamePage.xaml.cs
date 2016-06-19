@@ -61,6 +61,8 @@ namespace BreakOut_view
             statsTimer.Tick += StatsTimer_Tick;
             statsTimer.Interval = new TimeSpan(0, 0, 0, 0, 100); // 100ms
             statsTimer.Start();
+
+            GameOverWindow.Visibility = Visibility.Collapsed;
         }
 
         private void StatsTimer_Tick(object sender, object e) {
@@ -71,8 +73,15 @@ namespace BreakOut_view
             level_textBlock.Text = status.CurrentLevel.ToString();
 
             // Check for game over
-            if(status.GameStatus == GameStatus.GameOverStatus) {
-                // TODO: ...
+            if(status.GameStatus == GameStatus.GameOverStatus || status.GameStatus == GameStatus.GameCompleteStatus) {
+                finalScore_textBox.Text = theGame.Status.Score.ToString();
+                if (status.GameStatus == GameStatus.GameOverStatus) {
+                    finalMessage_textBlock.Text = "Game over";
+                }
+                else {
+                    finalMessage_textBlock.Text = "Winner";
+                }
+                GameOverWindow.Visibility = Visibility.Visible;
             }
         }
 
@@ -209,6 +218,10 @@ namespace BreakOut_view
                 theGame.resume();
                 button_pauze.Content = "Pauze";
             }
+        }
+        private void button_restartGame_Click(object sender, RoutedEventArgs e) {
+            GameOverWindow.Visibility = Visibility.Collapsed;
+            theGame.startScenario();
         }
 
         #endregion //events

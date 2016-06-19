@@ -8,6 +8,7 @@ namespace BreakOut_logic {
         GameStartupStatus = 0,
         GameRunningStatus,
         GameOverStatus,
+        GameCompleteStatus,
         GamePauzedStatus
     }
 

@@ -14,8 +14,21 @@
                     <GradientStop Color="#FFE6FFC8" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
+            <Grid Canvas.ZIndex="10"  x:Name="GameOverWindow" Canvas.Left="162" Canvas.Top="174" Height="367" Width="753" Background="#FFD3D0C7">
+                <TextBlock x:Name="finalMessage_textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Game over" 
+                           VerticalAlignment="Top" Height="128" Width="753" FontSize="100" TextAlignment="Center" 
+                           FontFamily="High Tower Text" Foreground="#FFC16666"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Score: " 
+                           VerticalAlignment="Top" Height="128" Width="399" FontSize="100" TextAlignment="Right" 
+                           FontFamily="High Tower Text" Foreground="#FF6666C1" Margin="0,128,354,0"/>
+                <TextBlock x:Name="finalScore_textBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="123 " 
+                	VerticalAlignment="Top" Height="128" Width="303" FontSize="100" TextAlignment="Left" 
+                	FontFamily="High Tower Text" Foreground="#FF6666C1" Margin="433,128,17,0"/>
+                <Button x:Name="button_restartGame" Content="Restart" HorizontalAlignment="Left" Margin="245,286,0,0" 
+                        VerticalAlignment="Top" Height="71" Width="293" FontSize="40" Click="button_restartGame_Click"/>
+            </Grid>
         </Canvas>
-        
+
         <Button x:Name="button_home" Content="Home" HorizontalAlignment="Left" Margin="1080,671,0,0" VerticalAlignment="Top" Height="49" Width="200" Click="button_home_Click"/>
         <Button x:Name="button_pauze" Content="Pauze" HorizontalAlignment="Left" Margin="1080,607,0,0" VerticalAlignment="Top" Height="49" Width="200" Click="button_pauze_Click"/>
         <TextBlock x:Name="bricksRemaining_textBlock" HorizontalAlignment="Left" Margin="1220,202,0,0" TextWrapping="Wrap" Text="Bricks" VerticalAlignment="Top" Height="29" Width="47"/>
