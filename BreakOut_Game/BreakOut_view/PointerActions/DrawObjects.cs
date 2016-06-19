@@ -124,7 +124,7 @@ namespace BreakOut_view {
 
             // Move the game pointer
             Canvas.SetLeft(gamePointer, snappedPoint.X - gamePointer.Width/2);
-            Canvas.SetTop(gamePointer, point.Position.Y - gamePointer.Height/2);
+            Canvas.SetTop(gamePointer, snappedPoint.Y - gamePointer.Height/2);
 
             // Draw/Update the new object
             if (currentObject != null) {

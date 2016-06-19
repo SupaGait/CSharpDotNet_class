@@ -7,12 +7,14 @@ namespace BreakOut_logic {
     public enum GameStatus {
         GameStartupStatus = 0,
         GameRunningStatus,
+        GameOverStatus,
         GamePauzedStatus
     }
 
     public class Status {
         public GameStatus GameStatus { get; set; }
         public int CurrentLevel { get; set; }
+        public int Balls { get; set; }
         public int Score { get; set; }
         public float TimeLeft_sec { get; set; }
         public bool TestingGame { get; set; }
@@ -31,6 +33,7 @@ namespace BreakOut_logic {
             // Reset all score and start the game
             TestingGame = false;
             CurrentLevel = 1;
+            Balls = 3;
             Score = 0;
             TimeLeft_sec = 60 * 5;
             GameStatus = GameStatus.GameRunningStatus;
@@ -40,6 +43,9 @@ namespace BreakOut_logic {
         }
         internal void resumeGame() {
             GameStatus = GameStatus.GameRunningStatus;
+        }
+        internal void addPoints(int points) {
+            Score += points;
         }
     }
 }

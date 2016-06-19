@@ -8,13 +8,13 @@ namespace BreakOut_logic.Objects {
         private CollisionManager collisionManager;
         private bool ballIsOnPaddle = true;
         private Paddle paddle;
-        private CollisionManager collisionObjectsManager;
+        private Status status;
 
-        public Ball(Paddle paddle, CollisionManager collisionManager) : base(ObjectType.BallType, Vector2.Zero, new Vector2(30, 30), false) {
-            // Todo input position and direction based on paddle?
-            this.direction = Vector2.UnitY;
-            this.paddle = paddle;
+        public Ball(CollisionManager collisionManager, Paddle paddle, Status status) : base(ObjectType.BallType, Vector2.Zero, new Vector2(30, 30), false) {
             this.collisionManager = collisionManager;
+            this.paddle = paddle;
+            this.status = status;
+            direction = Vector2.UnitY;
         }
 
         internal void update(float elapsedTimeMs) {
@@ -38,12 +38,19 @@ namespace BreakOut_logic.Objects {
                         }
                         // Check for wall
                         if (collisioObject.ObjectType == ObjectType.SurroundingType) {
-                            (collisioObject as SurroundingBox).getNewBallAngle(this);
+                            bool hasHitFloor;
+                            (collisioObject as SurroundingBox).getNewBallAngle(this, out hasHitFloor);
+                            if (hasHitFloor) {
+                                status.Balls -= 1;
+                                resetBall();
+                            }
                         }
                         // Check for brick
                         if (collisioObject.ObjectType == ObjectType.BrickType) {
-                            (collisioObject as Brick).getNewBallAngle(this);
-                            (collisioObject as Brick).InflictDamage(1);
+                            Brick brick = (collisioObject as Brick);
+                            brick.getNewBallAngle(this);
+                            brick.InflictDamage(1);
+                            status.addPoints(brick.getPoints());
                         }
                     }
                 }
@@ -51,8 +58,12 @@ namespace BreakOut_logic.Objects {
         }
 
         public void launchBall() {
-            this.direction = Vector2.UnitY; 
+            direction = Vector2.UnitY; 
             ballIsOnPaddle = false;
+        }
+
+        public void resetBall() {
+            ballIsOnPaddle = true;
         }
 
         public Vector2 Direction {

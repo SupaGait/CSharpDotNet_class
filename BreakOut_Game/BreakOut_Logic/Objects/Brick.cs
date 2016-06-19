@@ -43,5 +43,9 @@ namespace BreakOut_logic.Objects {
                 ball.Direction = new Vector2(ball.Direction.X, -ball.Direction.Y);
             }*/
         }
+
+        internal int getPoints() {
+            return 1;
+        }
     }
 }

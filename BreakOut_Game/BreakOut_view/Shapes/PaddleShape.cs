@@ -32,7 +32,7 @@ namespace BreakOut_view.Shapes {
                     }
                 case objectShape.BallShape: {
                         newObject.Shape = new Ellipse() {
-                            Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 255, 0))
+                            Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 0, 255))
                         };
                         break;
                     }

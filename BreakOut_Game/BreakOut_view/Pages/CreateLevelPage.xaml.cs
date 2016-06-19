@@ -47,8 +47,6 @@ namespace BreakOut_view {
 
             GridSize = (int)slider_gridSize.Value;
             HalfGridSize = GridSize / 2;
-
-            createGrid();
         }
 
         // Set the response of the interface based on the new mode
@@ -160,6 +158,10 @@ namespace BreakOut_view {
                 grid.Add(horizontalLine);
                 GameScreen.Children.Add(horizontalLine);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            createGrid();
         }
     }
 }

@@ -11,21 +11,27 @@ namespace BreakOut_logic.Objects {
 
             // If inside the box, no collision
             Vector2 resultV = collisionObject.Position - this.Position;
-            return (resultV.X < 0 || resultV.X > this.Size.X ||
-                    resultV.Y < 0 || resultV.Y > this.Size.Y);
+            return (resultV.X < 0 || resultV.X > Size.X ||
+                    resultV.Y < 0 || resultV.Y > Size.Y);
         }
 
 
         // Return a new angle based on position of impact relative to wall
-        public void getNewBallAngle(Ball ball) {
-            Vector2 resultV = ball.Position - this.Position;
+        public void getNewBallAngle(Ball ball, out bool hasHitFloor) {
+            Vector2 resultV = ball.Position - Position;
+            hasHitFloor = false;
+
 
             // Check axis
-            if (resultV.X < 0 || resultV.X > this.Size.X) {
+            if (resultV.X < 0 || resultV.X > Size.X) {
                 // X is out of the box
                 ball.Direction = new Vector2(-ball.Direction.X, ball.Direction.Y);
             }
             else {
+                if(resultV.Y >= Size.Y) {
+                    hasHitFloor = true;
+                }
+
                 // Y is out of the box
                 ball.Direction = new Vector2(ball.Direction.X, -ball.Direction.Y);
             }

@@ -7,7 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid Background="#FFE6E6E6">
-        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1080" Height="720" KeyDown="GameScreen_KeyDown" Margin="0,0,200,0" Background="White" PointerPressed="GameScreen_PointerPressed">
+        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1080" Height="720" KeyDown="GameScreen_KeyDown" Margin="0,0,200,0" PointerPressed="GameScreen_PointerPressed">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8FDC31" Offset="0"/>
+                    <GradientStop Color="#FFE6FFC8" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
         </Canvas>
         
         <Button x:Name="button_home" Content="Home" HorizontalAlignment="Left" Margin="1080,671,0,0" VerticalAlignment="Top" Height="49" Width="200" Click="button_home_Click"/>
@@ -18,7 +24,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="1094,202,0,0" TextWrapping="NoWrap" Text="Remaining bricks:" VerticalAlignment="Top"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="1120,14,0,0" TextWrapping="NoWrap" Text="Level " VerticalAlignment="Top" Height="50" Width="83" FontSize="36"/>
-        <TextBlock x:Name="score_textBlock_Copy" HorizontalAlignment="Left" Margin="1210,14,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="50" Width="48" FontSize="36"/>
+        <TextBlock x:Name="level_textBlock" HorizontalAlignment="Left" Margin="1210,14,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="50" Width="48" FontSize="36"/>
 
         <TextBlock x:Name="balls_textBlock" HorizontalAlignment="Left" Margin="1151,75,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="27" Width="24" FontSize="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="1175,75,0,0" TextWrapping="NoWrap" Text="Balls" VerticalAlignment="Top" FontSize="20"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -63,8 +64,16 @@ namespace BreakOut_view
         }
 
         private void StatsTimer_Tick(object sender, object e) {
-            score_textBlock.Text = theGame.Status.CurrentLevel.ToString();
-            bricksRemaining_textBlock.Text = theGame.Status.RemainingBricks.ToString();
+            Status status = theGame.Status;
+            balls_textBlock.Text = status.Balls.ToString();
+            score_textBlock.Text = status.Score.ToString();
+            bricksRemaining_textBlock.Text = status.RemainingBricks.ToString();
+            level_textBlock.Text = status.CurrentLevel.ToString();
+
+            // Check for game over
+            if(status.GameStatus == GameStatus.GameOverStatus) {
+                // TODO: ...
+            }
         }
 
         #region navigation

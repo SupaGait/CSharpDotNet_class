@@ -5,10 +5,16 @@
     xmlns:local="using:BreakOut_view"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid Background="#FFE6E6E6">
-        <Canvas Background="White" x:Name="GameScreen" Width="1080" Height="720" Margin="0,0,200,0">
+        <Canvas x:Name="GameScreen" Width="1080" Height="720" Margin="0,0,200,0">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8FDC31" Offset="0"/>
+                    <GradientStop Color="#FFE6FFC8" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
             <Canvas Width="50" Height="50" x:Name="gamePointer">
                 <Line X1="25" Y1="0" X2="25" Y2="50" Stroke="Black" StrokeThickness="2"/>
                 <Line X1="0" Y1="25" X2="50" Y2="25" Stroke="Black" StrokeThickness="2"/>
@@ -23,7 +29,7 @@
         <Button x:Name="button_home" Content="Return to main menu" Height="50" Canvas.Left="1034" Canvas.Top="654" Width="200" Click="button_home_Click" Margin="1080,669,0,0"/>
         <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Width="272" Margin="0,631,1008,0"/>
         <Button x:Name="button_testLevel" Content="Test level" Height="39" Canvas.Left="868" Canvas.Top="654" Width="200" Click="button_testLevel_Click" Margin="1080,364,0,317" />
-        <Slider x:Name="slider_gridSize" HorizontalAlignment="Left" Margin="1101,242,0,0" VerticalAlignment="Top" Width="139" Header="Grid size" Value="10" ValueChanged="slider_gridSize_ValueChanged"/>
+        <Slider x:Name="slider_gridSize" HorizontalAlignment="Left" Margin="1080,242,0,0" VerticalAlignment="Top" Width="200" Header="Grid size" Value="10" ValueChanged="slider_gridSize_ValueChanged" Minimum="4"/>
         <TextBox x:Name="textBox_levelName" HorizontalAlignment="Left" Margin="1080,455,0,0" TextWrapping="Wrap" Text="levelName" VerticalAlignment="Top" Width="200"/>
     </Grid>
 </Page>
