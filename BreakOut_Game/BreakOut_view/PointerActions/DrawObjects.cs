@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Shapes;
 namespace BreakOut_view {
     public class DrawObjects : PointerModeAction {
         private Canvas gameScreen;
-        private Canvas gamePointer;
 
         private PrintDebugMessage debugMessage;
 
@@ -22,10 +21,9 @@ namespace BreakOut_view {
         private CreateLevelPage createLevelPage;
 
         // Save the screen for drawing and the delegate to print messages
-        public DrawObjects(CreateLevelPage createLevelPage, Canvas gameScreen, Canvas gamePointer, PrintDebugMessage debugMessage){
+        public DrawObjects(CreateLevelPage createLevelPage, Canvas gameScreen, PrintDebugMessage debugMessage){
             this.createLevelPage = createLevelPage;
             this.gameScreen = gameScreen;
-            this.gamePointer = gamePointer;
             this.debugMessage = debugMessage;
         }
 
@@ -50,30 +48,15 @@ namespace BreakOut_view {
             drawableObject.Shape.Height = height;
             Canvas.SetLeft(drawableObject.Shape, xPos);
             Canvas.SetTop(drawableObject.Shape, yPos);
-            
+
             // Add the new shape to the canvas, and set initial position
+            createLevelPage.levelObjects.Add(drawableObject);
             gameScreen.Children.Add(drawableObject.Shape);
 
             return drawableObject;
         }
 
-        private Point snapToGrid(Point point) {
-            // Snap the X
-            int xPos = (int)point.X;
-            int xRemaining = xPos % createLevelPage.GridSize;
-            xPos -= xRemaining;
-            if (xRemaining > createLevelPage.HalfGridSize) {
-                xPos += createLevelPage.GridSize;
-            }
-            // Snap the Y
-            int yPos = (int)point.Y;
-            int yRemaining = yPos % createLevelPage.GridSize;
-            yPos -= yRemaining;
-            if (yRemaining > createLevelPage.HalfGridSize) {
-                yPos += createLevelPage.GridSize;
-            }
-            return new Point(xPos, yPos);
-        }
+
 
         #region events
         private void GameScreen_PointerPressed(object sender, PointerRoutedEventArgs e) {
@@ -84,7 +67,7 @@ namespace BreakOut_view {
                 Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
 
                 // Snap it to grid
-                Point snappedPoint = snapToGrid(point.Position);
+                Point snappedPoint = createLevelPage.snapToGrid(point.Position);
 
                 // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
                 currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, snappedPoint.X, snappedPoint.Y);
@@ -97,11 +80,12 @@ namespace BreakOut_view {
                 float y = (float)Canvas.GetTop(currentObject.Shape);
                 var size = new System.Numerics.Vector2((float)currentObject.Shape.Width, (float)currentObject.Shape.Height);
                 var position = new System.Numerics.Vector2(x, y);
-                //BaseObject newObject =  new BaseObject(ObjectType.BrickType, position, size, true);
+
+                // New brick and attach the ID for later use
                 Brick newBrick = new Brick(position, size, true);
+                currentObject.Id = newBrick.Id;
 
                 // Add the base object to the level, no more object selected
-                //level.addObject(newObject);
                 createLevelPage.Level.addBrick(newBrick);
                 currentObject = null;
             }
@@ -120,11 +104,10 @@ namespace BreakOut_view {
             debugMessage(message);
 
             // Snap to grid
-            Point snappedPoint = snapToGrid(point.Position);
+            Point snappedPoint = createLevelPage.snapToGrid(point.Position);
 
-            // Move the game pointer
-            Canvas.SetLeft(gamePointer, snappedPoint.X - gamePointer.Width/2);
-            Canvas.SetTop(gamePointer, snappedPoint.Y - gamePointer.Height/2);
+            // Move the pointer
+            createLevelPage.setPointer(snappedPoint);
 
             // Draw/Update the new object
             if (currentObject != null) {

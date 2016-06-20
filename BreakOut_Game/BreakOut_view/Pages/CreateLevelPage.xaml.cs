@@ -32,21 +32,28 @@ namespace BreakOut_view {
         public Wall Level { get; set; }
         public int GridSize { get; set; }
         public int HalfGridSize { get; set; }
+        public List<DrawableObject> levelObjects { get; set; }
+        public Button deleteButton { get; }
 
         public CreateLevelPage() {
             this.InitializeComponent();
             
             // Create the objects
             Level = new Wall();
-            drawObjects = new DrawObjects(this, GameScreen, gamePointer, debugMessage);
+            drawObjects = new DrawObjects(this, GameScreen, debugMessage);
             selectObjects = new SelectObjects(this, GameScreen, debugMessage);
+            levelObjects = new List<DrawableObject>();
 
             // Start in drawMode
             selectedMode = drawObjects;
+            button_draw.BorderThickness = new Thickness(1);
+            button_select.BorderThickness = new Thickness(0);
             selectedMode.register();
 
             GridSize = (int)slider_gridSize.Value;
             HalfGridSize = GridSize / 2;
+
+            deleteButton = button_deleteObject;
         }
 
         // Set the response of the interface based on the new mode
@@ -59,10 +66,14 @@ namespace BreakOut_view {
             switch (newMode) {
                 case PointerMode.DrawMode: {
                         selectedMode = drawObjects;
+                        button_draw.BorderThickness = new Thickness(2);
+                        button_select.BorderThickness = new Thickness(0);
                         break;
                     }
                 case PointerMode.SelectMode: {
                         selectedMode = selectObjects;
+                        button_draw.BorderThickness = new Thickness(0);
+                        button_select.BorderThickness = new Thickness(2);
                         break;
                     }
                 default: {
@@ -121,7 +132,6 @@ namespace BreakOut_view {
             GridSize = (int)slider_gridSize.Value;
             createGrid();
         }
-
         private void createGrid() {
             // Destroy old grid
             foreach (var gridLine in grid) {
@@ -160,8 +170,33 @@ namespace BreakOut_view {
             }
         }
 
+        internal Point snapToGrid(Point point) {
+            // Snap the X
+            int xPos = (int)point.X;
+            int xRemaining = xPos % GridSize;
+            xPos -= xRemaining;
+            if (xRemaining > HalfGridSize) {
+                xPos += GridSize;
+            }
+            // Snap the Y
+            int yPos = (int)point.Y;
+            int yRemaining = yPos % GridSize;
+            yPos -= yRemaining;
+            if (yRemaining > HalfGridSize) {
+                yPos += GridSize;
+            }
+            return new Point(xPos, yPos);
+        }
+
+        internal void setPointer(Point snappedPoint) {
+            // Move the game pointer
+            Canvas.SetLeft(gamePointer, snappedPoint.X - gamePointer.Width / 2);
+            Canvas.SetTop(gamePointer, snappedPoint.Y - gamePointer.Height / 2);
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             createGrid();
+            deleteButton.Visibility = Visibility.Collapsed;
         }
     }
 }

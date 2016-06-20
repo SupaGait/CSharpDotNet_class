@@ -27,6 +27,7 @@ namespace BreakOut_logic {
         public void runTestGame() {
             TestingGame = true;
             CurrentLevel = 99;
+            Balls = 99;
             Score = 0;
             GameStatus = GameStatus.GameRunningStatus;
         }
@@ -45,7 +46,7 @@ namespace BreakOut_logic {
         internal void resumeGame() {
             GameStatus = GameStatus.GameRunningStatus;
         }
-        internal void addPoints(int points) {
+        internal void addScore(int points) {
             Score += points;
         }
     }

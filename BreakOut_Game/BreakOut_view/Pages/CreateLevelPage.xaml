@@ -21,15 +21,16 @@
             </Canvas>
         </Canvas>
 
-        <Button x:Name="button_draw" Content="Draw mode" Height="62" Canvas.Left="10" Canvas.Top="564" Width="139" Click="button_draw_Click" Margin="1101,40,0,618"/>
-        <Button x:Name="button_select" Content="Select mode" Height="62" Canvas.Left="10" Canvas.Top="648" Width="139" Click="button_select_Click" Margin="1101,132,0,526"/>
+        <Button x:Name="button_draw" Content="Draw mode" Height="62" Canvas.Left="10" Canvas.Top="564" Width="139" Click="button_draw_Click" Margin="1111,103,0,555" Background="#338B8B31" BorderBrush="#FF00C800"/>
+        <Button x:Name="button_select" Content="Select mode" Height="62" Canvas.Left="10" Canvas.Top="648" Width="139" Click="button_select_Click" Margin="1111,170,0,488" BorderBrush="#FF00C800" Background="#338B8B31"/>
 
-        <Button x:Name="button_loadLevel" Content="Load Level" Height="50" Canvas.Left="1082" Canvas.Top="541" Width="200" Click="button_loadLevel_Click" Margin="1080,491,0,178"/>
-        <Button x:Name="button_saveLevel" Content="Save level" Height="50" Canvas.Left="1049" Canvas.Top="608" Width="200" Click="button_saveLevel_Click" Margin="1080,554,0,116"/>
+        <Button x:Name="button_loadLevel" Content="Load Level" Height="50" Canvas.Left="1082" Canvas.Top="541" Width="200" Click="button_loadLevel_Click" Margin="1080,516,0,154" Background="#338B8B31"/>
+        <Button x:Name="button_saveLevel" Content="Save level" Height="50" Canvas.Left="1049" Canvas.Top="608" Width="200" Click="button_saveLevel_Click" Margin="1080,578,0,92" Background="#338B8B31"/>
         <Button x:Name="button_home" Content="Return to main menu" Height="50" Canvas.Left="1034" Canvas.Top="654" Width="200" Click="button_home_Click" Margin="1080,669,0,0"/>
         <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Width="272" Margin="0,631,1008,0"/>
-        <Button x:Name="button_testLevel" Content="Test level" Height="39" Canvas.Left="868" Canvas.Top="654" Width="200" Click="button_testLevel_Click" Margin="1080,364,0,317" />
-        <Slider x:Name="slider_gridSize" HorizontalAlignment="Left" Margin="1080,242,0,0" VerticalAlignment="Top" Width="200" Header="Grid size" Value="10" ValueChanged="slider_gridSize_ValueChanged" Minimum="4"/>
-        <TextBox x:Name="textBox_levelName" HorizontalAlignment="Left" Margin="1080,455,0,0" TextWrapping="Wrap" Text="levelName" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="button_testLevel" Content="Test level" Height="39" Canvas.Left="868" Canvas.Top="654" Width="200" Click="button_testLevel_Click" Margin="1080,406,0,275" Background="#330699A0" />
+        <Slider x:Name="slider_gridSize" HorizontalAlignment="Left" Margin="1080,0,0,0" VerticalAlignment="Top" Width="200" Header="Grid size" Value="10" ValueChanged="slider_gridSize_ValueChanged" Minimum="4"/>
+        <TextBox x:Name="textBox_levelName" HorizontalAlignment="Left" Margin="1080,479,0,0" TextWrapping="Wrap" Text="levelName" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="button_deleteObject" Content="Delete object" HorizontalAlignment="Left" Margin="1111,301,0,0" VerticalAlignment="Top" Width="139" Background="#33C31717"/>
     </Grid>
 </Page>

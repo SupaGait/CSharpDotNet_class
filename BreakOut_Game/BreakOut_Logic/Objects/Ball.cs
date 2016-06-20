@@ -50,7 +50,7 @@ namespace BreakOut_logic.Objects {
                             Brick brick = (collisioObject as Brick);
                             brick.getNewBallAngle(this);
                             brick.InflictDamage(1);
-                            status.addPoints(brick.getPoints());
+                            status.addScore(brick.getPoints());
                         }
                     }
                 }
