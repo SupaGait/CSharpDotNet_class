@@ -58,8 +58,10 @@ namespace BreakOut_logic.Objects {
         }
 
         public void launchBall() {
-            direction = Vector2.UnitY; 
-            ballIsOnPaddle = false;
+            if (ballIsOnPaddle) { 
+                direction = Vector2.UnitY; 
+                ballIsOnPaddle = false;
+            }
         }
 
         public void resetBall() {

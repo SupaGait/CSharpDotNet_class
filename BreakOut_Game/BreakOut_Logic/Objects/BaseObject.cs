@@ -12,7 +12,6 @@ namespace BreakOut_logic.Objects {
         private ObjectType objectType;
         
         private bool destroyable;
-        private bool visable = true;
         public bool Destroy { get; set; }
 
         public BaseObject(ObjectType objectType, Vector2 position, Vector2 size, bool destroyable) : this() {

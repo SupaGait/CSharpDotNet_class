@@ -35,7 +35,7 @@ namespace BreakOut_logic {
             // Reset all score and start the game
             TestingGame = false;
             CurrentLevel = 1;
-            Balls = 3;
+            Balls = 6;
             Score = 0;
             TimeLeft_sec = 60 * 5;
             GameStatus = GameStatus.GameRunningStatus;

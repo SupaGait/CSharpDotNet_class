@@ -96,7 +96,10 @@ namespace BreakOut_view {
 
             // Save the new coordinates to the logic
             if (mousePressedOnObject && currentObject != null) {
-                createLevelPage.Level.Bricks.Find(brick => brick.Id == currentObject.Id).Position = new System.Numerics.Vector2((float)cursorPos.X, (float)cursorPos.Y); 
+                var brickFound = createLevelPage.Level.Bricks.Find(brick => brick.Id == currentObject.Id);
+                if(brickFound != null) {
+                    brickFound.Position = new System.Numerics.Vector2((float)Canvas.GetLeft(currentObject.Shape), (float)Canvas.GetTop(currentObject.Shape));
+                }
             }
             mousePressedOnObject = false;
         }

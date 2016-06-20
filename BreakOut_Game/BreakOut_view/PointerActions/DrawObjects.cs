@@ -8,7 +8,6 @@ using System.Text;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Shapes;
 
 namespace BreakOut_view {
     public class DrawObjects : PointerModeAction {
@@ -19,6 +18,8 @@ namespace BreakOut_view {
         private DrawableObject currentObject;
         private Point currentShapeStart;
         private CreateLevelPage createLevelPage;
+
+        static readonly int MinimalBrickSize = 4;
 
         // Save the screen for drawing and the delegate to print messages
         public DrawObjects(CreateLevelPage createLevelPage, Canvas gameScreen, PrintDebugMessage debugMessage){
@@ -56,43 +57,48 @@ namespace BreakOut_view {
             return drawableObject;
         }
 
-
-
         #region events
         private void GameScreen_PointerPressed(object sender, PointerRoutedEventArgs e) {
             debugMessage("Pressed!");
-            // New object
-            if(currentObject == null) { 
-                // Pointer location
-                Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
 
-                // Snap it to grid
-                Point snappedPoint = createLevelPage.snapToGrid(point.Position);
+            // Pointer location
+            Windows.UI.Input.PointerPoint point = e.GetCurrentPoint(gameScreen);
 
-                // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
-                currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, snappedPoint.X, snappedPoint.Y);
-                currentShapeStart.X = snappedPoint.X;
-                currentShapeStart.Y = snappedPoint.Y;
-            }
-            else {
-                // Create a new game object (Brick atm)
-                float x = (float)Canvas.GetLeft(currentObject.Shape);
-                float y = (float)Canvas.GetTop(currentObject.Shape);
-                var size = new System.Numerics.Vector2((float)currentObject.Shape.Width, (float)currentObject.Shape.Height);
-                var position = new System.Numerics.Vector2(x, y);
+            // Snap it to grid
+            Point snappedPoint = createLevelPage.snapToGrid(point.Position);
 
-                // New brick and attach the ID for later use
-                Brick newBrick = new Brick(position, size, true);
-                currentObject.Id = newBrick.Id;
-
-                // Add the base object to the level, no more object selected
-                createLevelPage.Level.addBrick(newBrick);
-                currentObject = null;
-            }
+            // Initiate drawing of a new object, save the location to be able to determine mouse relative movement
+            currentObject = createAndAddObject(ShapeFactory.objectShape.SimpleBrickShape, 0, 0, snappedPoint.X, snappedPoint.Y);
+            currentShapeStart.X = snappedPoint.X;
+            currentShapeStart.Y = snappedPoint.Y;
         }
         private void GameScreen_PointerReleased(object sender, PointerRoutedEventArgs e) {
-            debugMessage("Released");
             
+            if(currentObject != null) {
+                // Check for a minimal visual size
+                if(currentObject.Shape.ActualHeight > MinimalBrickSize && currentObject.Shape.ActualWidth > MinimalBrickSize) { 
+                    // Create a new game object (Brick atm)
+                    float x = (float)Canvas.GetLeft(currentObject.Shape);
+                    float y = (float)Canvas.GetTop(currentObject.Shape);
+                    var size = new System.Numerics.Vector2((float)currentObject.Shape.Width, (float)currentObject.Shape.Height);
+                    var position = new System.Numerics.Vector2(x, y);
+
+                    // New brick and attach the ID for later use
+                    Brick newBrick = new Brick(position, size, true);
+                    currentObject.Id = newBrick.Id;
+
+                    // Add the base object to the level, no more object selected
+                    createLevelPage.Level.addBrick(newBrick);
+                    
+                }
+                else {
+                    // Discard the object
+                    gameScreen.Children.Remove(currentObject.Shape);
+                    createLevelPage.levelObjects.Remove(currentObject);
+                }
+                currentObject = null;
+            }
+            debugMessage("Released");
             // Stop the drawing of a new object
         }
         private void GameScreen_PointerMoved(object sender, PointerRoutedEventArgs e) {

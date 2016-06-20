@@ -36,9 +36,12 @@ namespace BreakOut_logic {
             }
         }
         public void clearWall() {
-            foreach (var brick in Bricks) {
-                CollisionManager.removeObject(brick);
+            if(CollisionManager != null) {
+                foreach (var brick in Bricks) {
+                    CollisionManager.removeObject(brick);
+                }
             }
+            Bricks.Clear();
         }
 
         public void update() {

@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -107,25 +108,64 @@ namespace BreakOut_view {
         }
 
         private async void button_saveLevel_Click(object sender, RoutedEventArgs e) {
-            await LevelLoader.save(Level, textBox_levelName.Text+".xml");
-            debugMessage("Level saved.");
+            string levelName = textBox_levelName.Text + ".xml";
+
+            var dialogSave = new MessageDialog("Save as: " + levelName + "? \n\nSaved in:" + ApplicationData.Current.LocalFolder.Path);
+            dialogSave.Title = "Save level";
+            dialogSave.Commands.Add(new UICommand { Label = "Save", Id = 0 });
+            dialogSave.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var result = await dialogSave.ShowAsync();
+
+            // Save
+            if ((int)result.Id == 0) {
+
+                await LevelLoader.save(Level, textBox_levelName.Text + ".xml");
+                debugMessage("Level saved.");
+            }
+        }
+
+        private void clearLevel() {
+
+            foreach (var levelObject in levelObjects) {
+                GameScreen.Children.Remove(levelObject.Shape);
+            }
+            levelObjects.Clear();
+            Level.clearWall();
         }
 
         private async void button_loadLevel_Click(object sender, RoutedEventArgs e) {
-            // Load the lelel
-            Level = await LevelLoader.load(textBox_levelName.Text + ".xml");
+            string levelName = textBox_levelName.Text + ".xml";
 
-            // Draw the loaded level
-            foreach (var brick in Level.Bricks) {
-                var drawObject = drawObjects.createAndAddObject(
-                    Shapes.ShapeFactory.objectShape.SimpleBrickShape,
-                    brick.Size.X, brick.Size.Y,
-                    brick.Position.X, brick.Position.Y);
-                drawObject.Id = brick.Id;
+            var dialogLoad = new MessageDialog("Load: " + levelName + "?");
+            dialogLoad.Title = "Load level";
+            dialogLoad.Commands.Add(new UICommand { Label = "Load", Id = 0 });
+            dialogLoad.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var result = await dialogLoad.ShowAsync();
+
+            // Load
+            if ((int)result.Id == 0) {
+                // Clear current
+                clearLevel();
+
+                // Load the level
+                try {
+                    Level = await LevelLoader.load(levelName, false);
+                }
+                catch (Exception) {
+                    await new MessageDialog("Error loading level: " + levelName).ShowAsync();
+                }
+
+                // Draw the loaded level
+                foreach (var brick in Level.Bricks) {
+                    var drawObject = drawObjects.createAndAddObject(
+                        Shapes.ShapeFactory.objectShape.SimpleBrickShape,
+                        brick.Size.X, brick.Size.Y,
+                        brick.Position.X, brick.Position.Y);
+                    drawObject.Id = brick.Id;
+                }
+
+                debugMessage("Level loaded.");
             }
-
-            debugMessage("Level loaded.");
-            //debugMessage(ApplicationData.Current.LocalFolder.Path);
         }
 
         private void slider_gridSize_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
@@ -197,6 +237,19 @@ namespace BreakOut_view {
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             createGrid();
             deleteButton.Visibility = Visibility.Collapsed;
+        }
+
+        private async void button_clearScreen_Click(object sender, RoutedEventArgs e) {
+            var dialogDelAll = new MessageDialog("Delete all bricks?");
+            dialogDelAll.Title = "Delete ALL objects";
+            dialogDelAll.Commands.Add(new UICommand { Label = "DELETE ALL", Id = 0 });
+            dialogDelAll.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var result = await dialogDelAll.ShowAsync();
+
+            // Clear
+            if((int)result.Id == 0) {
+                clearLevel();
+            }          
         }
     }
 }

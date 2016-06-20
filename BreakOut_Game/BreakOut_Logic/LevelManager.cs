@@ -15,7 +15,7 @@ namespace BreakOut_logic {
         private bool levelLoadError;
         private bool loadingLevel;
 
-        static readonly string LevelName = "level_";
+        static readonly string LevelName = "scenario_level_";
 
         public LevelManager(CollisionManager collisionObjectsManager, Status status) {
             this.collisionObjectsManager = collisionObjectsManager;
@@ -45,15 +45,12 @@ namespace BreakOut_logic {
         public async Task<bool> load(String levelName) {
             try {
                 levelLoadError = false;
-                Level = await LevelLoader.load(levelName);
+                Level = await LevelLoader.load(levelName, true);
                 return true;
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 levelLoadError = true;
-                // TODO correct exceptions....
-                //throw new Exception("Error while loading level: " + levelName);
             }
-
             return false;
         }
 

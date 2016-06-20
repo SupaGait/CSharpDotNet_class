@@ -5,7 +5,6 @@ using Windows.Foundation;
 namespace BreakOut_logic.Objects {
     public class Paddle : CollisionObject {
         static Vector2 defaultSize = new Vector2(150, 30);
-        private double speed = 0.0;
         private Vector2 userPosition = new Vector2(0, 0);
         private Vector2 gameScreenSize;
         private float maxXposition = 0;
