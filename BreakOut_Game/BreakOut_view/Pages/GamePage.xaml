@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid Background="#FFE6E6E6">
-        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" Width="1080" Height="720" KeyDown="GameScreen_KeyDown" Margin="0,0,200,0" PointerPressed="GameScreen_PointerPressed">
+        <Canvas x:Name="GameScreen" PointerMoved="GameScreen_PointerMoved" SizeChanged="GameScreen_SizeChanged" 
+                Width="1080" Height="720" KeyDown="GameScreen_KeyDown" PointerPressed="GameScreen_PointerPressed" 
+                HorizontalAlignment="Left" VerticalAlignment="Top">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF8FDC31" Offset="0"/>

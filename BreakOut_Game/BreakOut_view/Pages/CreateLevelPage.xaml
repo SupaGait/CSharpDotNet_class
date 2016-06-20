@@ -8,7 +8,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid Background="#FFE6E6E6">
-        <Canvas x:Name="GameScreen" Width="1080" Height="720" Margin="0,0,200,0">
+        <Canvas x:Name="GameScreen" Width="1080" Height="720" Margin="0,0,200,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF8FDC31" Offset="0"/>
@@ -27,7 +27,7 @@
         <Button x:Name="button_loadLevel" Content="Load Level" Height="50" Canvas.Left="1082" Canvas.Top="541" Width="200" Click="button_loadLevel_Click" Margin="1080,516,0,154" Background="#338B8B31"/>
         <Button x:Name="button_saveLevel" Content="Save level" Height="50" Canvas.Left="1049" Canvas.Top="608" Width="200" Click="button_saveLevel_Click" Margin="1080,578,0,92" Background="#338B8B31"/>
         <Button x:Name="button_home" Content="Return to main menu" Height="50" Canvas.Left="1034" Canvas.Top="654" Width="200" Click="button_home_Click" Margin="1080,669,0,0"/>
-        <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Width="272" Margin="0,631,1008,0"/>
+        <TextBox x:Name="textBox_debug" Canvas.Left="178" TextWrapping="Wrap" Text="debug info" Canvas.Top="564" Width="272" Margin="0,631,1008,0" Visibility="Collapsed"/>
         <Button x:Name="button_testLevel" Content="Test level" Height="39" Canvas.Left="868" Canvas.Top="654" Width="200" Click="button_testLevel_Click" Margin="1080,406,0,275" Background="#330699A0" />
         <Slider x:Name="slider_gridSize" HorizontalAlignment="Left" Margin="1080,0,0,0" VerticalAlignment="Top" Width="200" Header="Grid size" Value="10" ValueChanged="slider_gridSize_ValueChanged" Minimum="4"/>
         <TextBox x:Name="textBox_levelName" HorizontalAlignment="Left" Margin="1080,479,0,0" TextWrapping="Wrap" Text="levelName" VerticalAlignment="Top" Width="200"/>
