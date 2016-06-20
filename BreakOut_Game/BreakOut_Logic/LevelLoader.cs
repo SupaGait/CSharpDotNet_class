@@ -47,5 +47,21 @@ namespace BreakOut_logic {
                 xs.Serialize(stream, level);
             }
         }
+
+        public static async Task save(Wall level, StorageFile storageFile) {
+            // Serialize the level
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+            using (Stream stream = await storageFile.OpenStreamForWriteAsync()) {
+                xs.Serialize(stream, level);
+            }
+        }
+        public static async Task<Wall> load(StorageFile storageFile) {
+            Wall level;
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+            using (Stream stream = await storageFile.OpenStreamForReadAsync()) {
+                level = xs.Deserialize(stream) as Wall;
+            }
+            return level;
+        }
     }
 }

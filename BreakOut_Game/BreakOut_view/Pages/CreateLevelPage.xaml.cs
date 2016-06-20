@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Provider;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -107,22 +109,7 @@ namespace BreakOut_view {
             this.Frame.Navigate(typeof(GamePage), Level);
         }
 
-        private async void button_saveLevel_Click(object sender, RoutedEventArgs e) {
-            string levelName = textBox_levelName.Text + ".xml";
 
-            var dialogSave = new MessageDialog("Save as: " + levelName + "? \n\nSaved in:" + ApplicationData.Current.LocalFolder.Path);
-            dialogSave.Title = "Save level";
-            dialogSave.Commands.Add(new UICommand { Label = "Save", Id = 0 });
-            dialogSave.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
-            var result = await dialogSave.ShowAsync();
-
-            // Save
-            if ((int)result.Id == 0) {
-
-                await LevelLoader.save(Level, textBox_levelName.Text + ".xml");
-                debugMessage("Level saved.");
-            }
-        }
 
         private void clearLevel() {
 
@@ -132,28 +119,31 @@ namespace BreakOut_view {
             levelObjects.Clear();
             Level.clearWall();
         }
+        private async void button_saveLevel_Click(object sender, RoutedEventArgs e) {
 
+            FileSavePicker savePicker = new FileSavePicker();
+            savePicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
+            savePicker.FileTypeChoices.Add("xml", new List<string>() { ".xml" });
+            savePicker.SuggestedFileName = "BlockBreakerLevel";
+
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file != null) { 
+                await LevelLoader.save(Level, file);
+            }
+
+            debugMessage("Level saved.");
+        }
         private async void button_loadLevel_Click(object sender, RoutedEventArgs e) {
-            string levelName = textBox_levelName.Text + ".xml";
 
-            var dialogLoad = new MessageDialog("Load: " + levelName + "?");
-            dialogLoad.Title = "Load level";
-            dialogLoad.Commands.Add(new UICommand { Label = "Load", Id = 0 });
-            dialogLoad.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
-            var result = await dialogLoad.ShowAsync();
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.List;
+            openPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
+            openPicker.FileTypeFilter.Add(".xml");
 
-            // Load
-            if ((int)result.Id == 0) {
-                // Clear current
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file != null) {
                 clearLevel();
-
-                // Load the level
-                try {
-                    Level = await LevelLoader.load(levelName, false);
-                }
-                catch (Exception) {
-                    await new MessageDialog("Error loading level: " + levelName).ShowAsync();
-                }
+                Level = await LevelLoader.load(file);
 
                 // Draw the loaded level
                 foreach (var brick in Level.Bricks) {
@@ -163,8 +153,6 @@ namespace BreakOut_view {
                         brick.Position.X, brick.Position.Y);
                     drawObject.Id = brick.Id;
                 }
-
-                debugMessage("Level loaded.");
             }
         }
 
