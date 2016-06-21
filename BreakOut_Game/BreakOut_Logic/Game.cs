@@ -14,12 +14,12 @@ namespace BreakOut_logic {
         // Managers
         public Status Status { get; }
         public LevelManager LevelManager { get; }
-        private CollisionManager collisionObjectsManager { get; }
+        private CollisionManager CollisionObjectsManager { get; }
 
         // Game Objects
         private Paddle paddle;
         private Ball ball;
-        private SurroundingBox surroundingBox;
+        private SurroundingBox surroundingBox { get; }
      
         // Logic
         private DispatcherTimer timer;
@@ -27,9 +27,9 @@ namespace BreakOut_logic {
 
         public Game(IDrawComponents drawer, int updateTime_ms, Size gameScreenSize) {
             // Game logic
-            collisionObjectsManager = new CollisionManager();
+            CollisionObjectsManager = new CollisionManager();
             Status = new Status();
-            LevelManager = new LevelManager(collisionObjectsManager, Status);
+            LevelManager = new LevelManager(CollisionObjectsManager, Status);
             timer = new DispatcherTimer();
 
             // Configurate the timer
@@ -45,22 +45,26 @@ namespace BreakOut_logic {
 
             // Create objects
             paddle = new Paddle(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
-            ball = new Ball(collisionObjectsManager, paddle, Status);
+            ball = new Ball(CollisionObjectsManager, paddle, Status);
             ball.Position = new Vector2((float)gameScreenSize.Width / 2, (float)gameScreenSize.Height / 2);
 
             // Add default objects to collision manager
-            collisionObjectsManager.addObject(surroundingBox);
-            collisionObjectsManager.addObject(paddle);
+            CollisionObjectsManager.addObject(surroundingBox);
+            CollisionObjectsManager.addObject(paddle);
+            CollisionObjectsManager.addObject(ball);
         }
 
         private void updateGameTimout(object sender, object e) {
             float elapsedTimeMs = (float)(sender as DispatcherTimer).Interval.TotalMilliseconds;
 
             if (Status.GameStatus == GameStatus.GameRunningStatus) {
-                // Update    
+                // Update objects, positions, animations, whatever
                 ball.update(elapsedTimeMs);
                 paddle.update(elapsedTimeMs);
                 LevelManager.update();
+
+                // Collisions
+                CollisionObjectsManager.update();
 
                 // Draw
                 drawer.drawPaddle(paddle);
@@ -96,22 +100,9 @@ namespace BreakOut_logic {
         public void Reset() {
             throw new System.NotImplementedException();
         }
-
-        internal SurroundingBox SurroundingBox {
-            get {
-                return surroundingBox;
-            }
-        }
         public void SetScreenSize(Size size) {
             throw new NotImplementedException();
         }
-
-        public CollisionManager CollisionObjectsManager {
-            get {
-                return collisionObjectsManager;
-            }
-        }
-
 
     }
 }

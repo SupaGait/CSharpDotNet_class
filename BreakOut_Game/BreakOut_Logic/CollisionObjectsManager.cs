@@ -26,5 +26,22 @@ namespace BreakOut_logic {
             }
             return objectsInCollision;
         }
+
+        public void update() {
+            foreach (CollisionObject collisionObjectA in collisionObjects) {
+                // For all moving objects, check if they collided against another object
+                if (collisionObjectA.IsMoving) {
+                    foreach(CollisionObject collisionObjectB in collisionObjects) {
+                        // Dont check for itself
+                        if (collisionObjectB != collisionObjectA) { 
+                            if (collisionObjectB.checkCollision(collisionObjectA)) {
+                                // Inform the moving object with the collision
+                                collisionObjectA.isInCollisionWith(collisionObjectB);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

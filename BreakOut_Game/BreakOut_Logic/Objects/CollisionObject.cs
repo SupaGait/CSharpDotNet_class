@@ -4,14 +4,21 @@ namespace BreakOut_logic.Objects {
 
     // Abstract class which can be used for objects that have collision check.
     public abstract class CollisionObject : BaseObject, ICheckCollision {
-        public CollisionObject(ObjectType objectType, Vector2 position, Vector2 size, bool destroyable) :
-            base(objectType, position, size, destroyable) {
-        }
+        public bool IsMoving { get; }
 
+        public CollisionObject(ObjectType objectType, bool isMoving, Vector2 position, Vector2 size, bool destroyable) :
+            base(objectType, position, size, destroyable) {
+            IsMoving = isMoving;
+        }
         public CollisionObject() { }
 
         // Objects need to implement a collition check interface
         public abstract bool checkCollision(BaseObject collisionObject);
+
+        // Object is informed if there is a collision
+        public virtual void isInCollisionWith(BaseObject collisionObject) {
+            // Normally do nothing
+        }
 
         // Helper methods
         static public bool checkSquareCollision(BaseObject objectA, BaseObject objectB) {
@@ -26,6 +33,14 @@ namespace BreakOut_logic.Objects {
             bool lowerInside = lowerRightAInB.X > 0 && lowerRightAInB.X < objectB.Size.X && lowerRightAInB.Y > 0 && lowerRightAInB.Y < objectB.Size.Y;
 
             return (upperInside || lowerInside);
+        }
+
+        public void moveAtImpactPosition(BaseObject collisionObject) {
+            // Iterate back until the ball is out of this object
+            Vector2 direction = Vector2.Normalize(Direction);
+            while (checkCollision(collisionObject)) {
+                Position -= direction;
+            }
         }
     }
 }

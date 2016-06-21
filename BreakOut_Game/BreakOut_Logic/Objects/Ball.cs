@@ -1,20 +1,20 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Windows.Foundation;
 
 namespace BreakOut_logic.Objects {
-    public class Ball : BaseObject {
-        private Vector2 direction;
+    public class Ball : CollisionObject {
         private int velocity_PixelSec = 15000;
         private CollisionManager collisionManager;
         private bool ballIsOnPaddle = true;
         private Paddle paddle;
         private Status status;
 
-        public Ball(CollisionManager collisionManager, Paddle paddle, Status status) : base(ObjectType.BallType, Vector2.Zero, new Vector2(30, 30), false) {
+        public Ball(CollisionManager collisionManager, Paddle paddle, Status status) : base(ObjectType.BallType, true, Vector2.Zero, new Vector2(30, 30), false) {
             this.collisionManager = collisionManager;
             this.paddle = paddle;
             this.status = status;
-            direction = Vector2.UnitY;
+            Direction = -Vector2.UnitY;
         }
 
         internal void update(float elapsedTimeMs) {
@@ -24,53 +24,50 @@ namespace BreakOut_logic.Objects {
             }
             else {
                 // Update the position based on the direction
-                Position += ((elapsedTimeMs / 1000) * velocity_PixelSec) * direction;
+                Position += ((elapsedTimeMs / 1000) * velocity_PixelSec) * Direction;
+            }
+        }
+        public override bool checkCollision(BaseObject collisionObject) {
+            return checkSquareCollision(collisionObject, this);
+        }
+        public override void isInCollisionWith(BaseObject collisionObject) {
 
-                // Check for collision against any object
-                var collisionObjects = collisionManager.checkCollision(this);
+            // Replace the ball just before collision
+            moveAtImpactPosition(collisionObject);
 
-                // Take the first object
-                if (collisionObjects.Count > 0) {
-                    foreach (CollisionObject collisioObject in collisionObjects) {
-                        // Check for an paddle
-                        if (collisioObject.ObjectType == ObjectType.PaddleType) {
-                            (collisioObject as Paddle).getNewBallAngle(this);
-                        }
-                        // Check for wall
-                        if (collisioObject.ObjectType == ObjectType.SurroundingType) {
-                            bool hasHitFloor;
-                            (collisioObject as SurroundingBox).getNewBallAngle(this, out hasHitFloor);
-                            if (hasHitFloor) {
-                                status.Balls -= 1;
-                                resetBall();
-                            }
-                        }
-                        // Check for brick
-                        if (collisioObject.ObjectType == ObjectType.BrickType) {
-                            Brick brick = (collisioObject as Brick);
-                            brick.getNewBallAngle(this);
-                            brick.InflictDamage(1);
-                            status.addScore(brick.getPoints());
-                        }
-                    }
+            // Check for an paddle
+            if (collisionObject.ObjectType == ObjectType.PaddleType) {
+                (collisionObject as Paddle).getNewBallAngle(this);
+            }
+
+            // Check for wall
+            if (collisionObject.ObjectType == ObjectType.SurroundingType) {
+                bool hasHitFloor;
+                (collisionObject as SurroundingBox).getNewBallAngle(this, out hasHitFloor);
+                if (hasHitFloor) {
+                    status.Balls -= 1;
+                    resetBall();
                 }
+            }
+            // Check for brick
+            if (collisionObject.ObjectType == ObjectType.BrickType) {
+                Brick brick = (collisionObject as Brick);
+                brick.getNewBallAngle(this);
+                brick.InflictDamage(1);
+                status.addScore(brick.getPoints());
             }
         }
 
         public void launchBall() {
             if (ballIsOnPaddle) { 
-                direction = Vector2.UnitY; 
+                Direction = -Vector2.UnitY; 
                 ballIsOnPaddle = false;
             }
         }
-
         public void resetBall() {
             ballIsOnPaddle = true;
         }
 
-        public Vector2 Direction {
-            get { return direction; }
-            set { direction = value; }
-        }
+
     }
 }

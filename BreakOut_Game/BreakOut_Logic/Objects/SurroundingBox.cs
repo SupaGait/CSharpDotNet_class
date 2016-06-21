@@ -4,7 +4,7 @@ using System.Numerics;
 namespace BreakOut_logic.Objects {
     class SurroundingBox : CollisionObject {
 
-        public SurroundingBox(Vector2 size) : base(ObjectType.SurroundingType, Vector2.Zero, size, true) {
+        public SurroundingBox(Vector2 size) : base(ObjectType.SurroundingType,false, Vector2.Zero, size, true) {
         }
 
         public override bool checkCollision(BaseObject collisionObject) {

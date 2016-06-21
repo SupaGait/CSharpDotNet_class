@@ -15,9 +15,11 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Button x:Name="NewGame" Content="New Game" HorizontalAlignment="Left" Margin="489,368,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="NewGame_Click" Foreground="Black" FontFamily="High Tower Text"/>
-        <Button x:Name="CreateLevel" Content="Create Level" HorizontalAlignment="Left" Margin="489,516,0,0" VerticalAlignment="Top" Height="104" Width="277" FontSize="30" Click="CreateLevel_Click" FontFamily="High Tower Text"/>
+        <Button x:Name="CreateLevel" Content="Create Level" HorizontalAlignment="Left" Margin="489,508,0,0" VerticalAlignment="Top" Height="76" Width="277" FontSize="30" Click="CreateLevel_Click" FontFamily="High Tower Text"/>
 
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="168,100,167,0" TextWrapping="Wrap" Text="Block Breaker" VerticalAlignment="Top" Height="196" Width="945" FontSize="120" TextAlignment="Center" FontFamily="High Tower Text" Foreground="#FF6666C1"/>
         <TextBlock HorizontalAlignment="Left" Text="Gerard Klomphaar" VerticalAlignment="Top" FontSize="40" TextAlignment="Center" FontFamily="Kunstler Script" Foreground="#FF6666C1" Margin="1015,661,0,0" Width="265" Height="59"/>
+        <Button x:Name="CreateLevel_Copy" Content="Create Level" HorizontalAlignment="Left" Margin="489,508,0,0" VerticalAlignment="Top" Height="76" Width="277" FontSize="30" Click="CreateLevel_Click" FontFamily="High Tower Text"/>
+        <ListView x:Name="listView_storedLevels" HorizontalAlignment="Left" Height="268" Margin="943,268,0,0" VerticalAlignment="Top" Width="288"/>
     </Grid>
 </Page>

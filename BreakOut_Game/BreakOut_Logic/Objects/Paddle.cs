@@ -10,7 +10,7 @@ namespace BreakOut_logic.Objects {
         private float maxXposition = 0;
 
         public Paddle(Vector2 gameScreenSize) : 
-            base(ObjectType.PaddleType, new Vector2((gameScreenSize.X - defaultSize.X)/2, gameScreenSize.Y - defaultSize.Y), 
+            base(ObjectType.PaddleType, true, new Vector2((gameScreenSize.X - defaultSize.X)/2, gameScreenSize.Y - defaultSize.Y), 
                 defaultSize, false) {
             this.gameScreenSize = gameScreenSize;
             this.maxXposition = gameScreenSize.X - this.Size.X;
