@@ -107,6 +107,8 @@
     <Content Include="levels\scenario_level_4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="textures\ball.jpg" />
+    <Content Include="textures\paddle.png" />
     <None Include="Pages\CreateLevelArchitecture.cd" />
     <None Include="project.json" />
     <None Include="Shapes\draw.cd" />
