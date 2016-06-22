@@ -27,13 +27,13 @@ namespace BreakOut_logic.Objects {
                 Position += ((elapsedTimeMs / 1000) * velocity_PixelSec) * Direction;
             }
         }
-        public override bool checkCollision(BaseObject collisionObject) {
+        public override bool checkCollision(CollisionObject collisionObject) {
             return checkSquareCollision(collisionObject, this);
         }
-        public override void isInCollisionWith(BaseObject collisionObject) {
+        public override void isInCollisionWith(CollisionObject collisionObject) {
 
             // Replace the ball just before collision
-            moveAtImpactPosition(collisionObject);
+            //moveAtImpactPosition(collisionObject);
 
             // Check for an paddle
             if (collisionObject.ObjectType == ObjectType.PaddleType) {

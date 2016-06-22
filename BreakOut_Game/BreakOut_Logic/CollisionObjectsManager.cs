@@ -16,7 +16,7 @@ namespace BreakOut_logic {
         }
 
         // Run through all known collision objects and check for a collision with the given object
-        public List<CollisionObject> checkCollision(BaseObject objectToCheck) {
+        public List<CollisionObject> checkCollision(CollisionObject objectToCheck) {
             List<CollisionObject> objectsInCollision = new List<CollisionObject>();
 
             foreach(CollisionObject collisionObject in collisionObjects) {

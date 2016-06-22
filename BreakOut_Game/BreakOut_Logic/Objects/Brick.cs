@@ -11,7 +11,7 @@ namespace BreakOut_logic.Objects {
         }
         public Brick(){}
 
-        public override bool checkCollision(BaseObject collisionObject) {
+        public override bool checkCollision(CollisionObject collisionObject) {
             return checkSquareCollision(collisionObject, this);
         }
         public void InflictDamage(int dmg) {
@@ -22,11 +22,17 @@ namespace BreakOut_logic.Objects {
         }
         // Return a new angle based on position of impact
         public void getNewBallAngle(Ball ball) {
-            Vector2 resultV = ball.Position - this.Position;
-            Vector2 centerPos = this.Position + this.Size/2;
-
-            // From top/bottom - inverse the Y direction
-            ball.Direction = new Vector2(ball.Direction.X, -ball.Direction.Y);
+            Vector2 centerBallpos = ball.Position + ball.Size/2;
+            if (centerBallpos.Y > Position.Y &&
+                centerBallpos.Y < Position.Y + Size.Y) {
+                
+                // From sides - inverse the x direction
+                ball.Direction = new Vector2(-ball.Direction.X, ball.Direction.Y);
+            }
+            else {
+                // From top/bottom - inverse the Y direction
+                ball.Direction = new Vector2(ball.Direction.X, -ball.Direction.Y);
+            }
         }
 
         internal int getPoints() {

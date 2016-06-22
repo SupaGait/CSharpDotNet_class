@@ -44,7 +44,7 @@ namespace BreakOut_logic.Objects {
         }
 
         // Check for collision
-        public override bool checkCollision(BaseObject collisionObject) {
+        public override bool checkCollision(CollisionObject collisionObject) {
             return checkSquareCollision(collisionObject, this);
         }
 
