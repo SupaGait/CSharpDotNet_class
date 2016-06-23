@@ -26,6 +26,8 @@ namespace BreakOut_logic {
         private IDrawComponents drawer;
 
         public Game(IDrawComponents drawer, int updateTime_ms, Size gameScreenSize) {
+            this.drawer = drawer;
+
             // Game logic
             CollisionObjectsManager = new CollisionManager();
             Status = new Status();
@@ -36,9 +38,6 @@ namespace BreakOut_logic {
             timer.Tick += updateGameTimout;
             timer.Interval = new TimeSpan(0, 0, 0, 0, updateTime_ms);
             timer.Start();
-            
-            // Save the responsible for drawing on screen
-            this.drawer = drawer;
 
             // Configurate the game
             surroundingBox = new SurroundingBox(new Vector2((float)gameScreenSize.Width, (float)gameScreenSize.Height));
